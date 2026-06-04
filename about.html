@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — [Name] | AI & Humanity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────── */
+    :root {
+      --bg:            #080810;
+      --bg-card:       #10101A;
+      --bg-card-hover: #15152A;
+      --border:        rgba(255,255,255,0.07);
+      --border-hover:  rgba(255,255,255,0.15);
+      --text:          #FFFFFF;
+      --text-muted:    #8888A0;
+      --text-dim:      #44445A;
+      --accent:        #7C3AED;
+      --accent-light:  #A78BFA;
+      --grad:          linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
+      --grad-text:     linear-gradient(135deg, #A78BFA, #F472B6);
+      --radius:        12px;
+      --radius-lg:     20px;
+    }
+
+    /* ─── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── Typography ─────────────────────────────────────── */
+    h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    h3 { font-size: 18px; font-weight: 700; }
+
+    .gradient-text {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 18px;
+    }
+    .label::before {
+      content: '';
+      display: block;
+      width: 16px; height: 2px;
+      background: var(--accent-light);
+      border-radius: 2px;
+    }
+
+    /* ─── Buttons ─────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--grad);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(124,58,237,0.35);
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid var(--border-hover);
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.25); }
+    .btn-lg { padding: 15px 30px; font-size: 16px; border-radius: 11px; }
+
+    /* ─── Layout ─────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    section { padding: 100px 0; }
+
+    /* ─── Nav ────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 0 40px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(8,8,16,0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--grad); flex-shrink: 0; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text-muted);
+      border-radius: 2px;
+    }
+
+    /* ─── Page Sub-Nav ───────────────────────────────────── */
+    .subnav {
+      position: sticky;
+      top: 68px;
+      z-index: 100;
+      background: rgba(8,8,16,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+    }
+    .subnav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+    }
+    .subnav a {
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dim);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .subnav a:hover { color: var(--text-muted); }
+    .subnav a.active { color: var(--text); border-bottom-color: var(--accent-light); }
+
+    /* ─── Hero ───────────────────────────────────────────── */
+    .hero {
+      padding-top: calc(68px + 49px); /* nav + subnav */
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      top: 0; right: -200px;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Photo placeholder */
+    .photo-wrap {
+      position: relative;
+    }
+    .photo-frame {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 20px;
+      background: linear-gradient(160deg, rgba(124,58,237,0.25) 0%, rgba(99,102,241,0.12) 40%, rgba(8,8,16,0.9) 100%);
+      border: 1px solid rgba(124,58,237,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      top: 15%; left: 50%;
+      transform: translateX(-50%);
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(124,58,237,0.4), rgba(236,72,153,0.2));
+      border: 1px solid rgba(124,58,237,0.3);
+    }
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      top: calc(15% + 110px); left: 50%;
+      transform: translateX(-50%);
+      width: 180px; height: 200px;
+      border-radius: 50% 50% 0 0;
+      background: linear-gradient(180deg, rgba(124,58,237,0.2), transparent);
+      border-top: 1px solid rgba(124,58,237,0.2);
+    }
+    .photo-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+    .photo-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-hover);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .photo-badge-val {
+      font-size: 22px;
+      font-weight: 800;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .photo-badge-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    /* Hero content */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .tag {
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--border-hover);
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.03);
+    }
+    .tag-accent {
+      border-color: rgba(124,58,237,0.4);
+      color: var(--accent-light);
+      background: rgba(124,58,237,0.08);
+    }
+    .hero-bio {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-top: 20px;
+      margin-bottom: 36px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* ─── Stats Strip ────────────────────────────────────── */
+    .stats-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.015);
+      padding: 0;
+    }
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-item {
+      padding: 40px 0;
+      text-align: center;
+      position: relative;
+    }
+    .stat-item + .stat-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 25%; bottom: 25%;
+      width: 1px;
+      background: var(--border);
+    }
+    .stat-number {
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ─── Mission ────────────────────────────────────────── */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .mission-body {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+    .mission-body p + p { margin-top: 18px; }
+    .mission-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .pillar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .pillar:hover { border-color: var(--border-hover); }
+    .pillar-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: rgba(124,58,237,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .pillar-text h3 { font-size: 15px; margin-bottom: 4px; }
+    .pillar-text p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ─── Credentials ────────────────────────────────────── */
+    .cred-section { background: rgba(255,255,255,0.01); }
+    .cred-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+    .cred-tab {
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dim);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: inherit;
+    }
+    .cred-tab:hover { color: var(--text-muted); }
+    .cred-tab.active { color: var(--text); border-bottom-color: var(--accent-light); }
+    .speaking-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .speaking-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      transition: all 0.2s;
+    }
+    .speaking-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .speaking-card-event {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-light);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .speaking-card h3 { font-size: 15px; margin-bottom: 4px; }
+    .speaking-card-meta {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .media-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .media-card:hover { border-color: var(--border-hover); }
+    .media-logo {
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+    .media-type {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── AI Twin Teaser ─────────────────────────────────── */
+    .twin-section {
+      position: relative;
+      overflow: hidden;
+    }
+    .twin-glow {
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 400px;
+      background: radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .twin-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .twin-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 360px;
+      position: relative;
+    }
+    .twin-disc {
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 32%, rgba(124,58,237,0.45), rgba(236,72,153,0.18) 60%, transparent 80%);
+      border: 1px solid rgba(124,58,237,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .twin-disc::after {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%);
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.06); }
+    }
+    .twin-orbit { position: absolute; border-radius: 50%; border: 1px solid var(--border); }
+    .twin-orbit-1 { width: 320px; height: 320px; animation: spin 22s linear infinite; }
+    .twin-orbit-dot {
+      position: absolute;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      top: -3.5px; left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 10px var(--accent-light);
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .twin-label {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .twin-label strong {
+      display: block;
+      font-size: 15px;
+      color: var(--accent-light);
+      margin-bottom: 6px;
+    }
+    .twin-features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 28px 0 36px;
+    }
+    .twin-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+    .twin-feature-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      flex-shrink: 0;
+    }
+
+    /* ─── Speaking CTA ───────────────────────────────────── */
+    .speak-box {
+      background: linear-gradient(135deg,
+        rgba(99,102,241,0.1) 0%,
+        rgba(139,92,246,0.1) 50%,
+        rgba(236,72,153,0.07) 100%);
+      border: 1px solid rgba(124,58,237,0.22);
+      border-radius: 24px;
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .speak-box::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .speak-box h2 { margin-bottom: 12px; }
+    .speak-box p { font-size: 17px; color: var(--text-muted); }
+    .speak-ctas { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; flex-shrink: 0; }
+
+    /* ─── Footer ─────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 44px 40px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-links { display: flex; gap: 26px; list-style: none; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 13.5px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--text-muted); }
+    .footer-copy { font-size: 13px; color: var(--text-dim); }
+
+    /* ─── Chat Bubble ────────────────────────────────────── */
+    .chat-fab {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .chat-tooltip {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hover);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 13px;
+      color: var(--text);
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all 0.2s;
+      pointer-events: none;
+    }
+    .chat-fab:hover .chat-tooltip { opacity: 1; transform: translateY(0); }
+    .chat-btn {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--grad);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 8px 32px rgba(124,58,237,0.45);
+      transition: transform 0.2s;
+    }
+    .chat-btn:hover { transform: scale(1.1); }
+
+    /* ─── Mobile ─────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
+      .nav-links, .nav-cta-desktop { display: none; }
+      .hamburger { display: flex; }
+      .subnav { padding: 0 24px; overflow-x: auto; }
+      .subnav-inner { min-width: max-content; }
+
+      .hero { min-height: auto; padding-bottom: 60px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .photo-frame { aspect-ratio: 4/3; max-width: 340px; margin: 0 auto; }
+
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item + .stat-item::before { display: none; }
+      .stat-item { border-bottom: 1px solid var(--border); }
+
+      .mission-grid { grid-template-columns: 1fr; gap: 48px; }
+      .speaking-grid { grid-template-columns: 1fr 1fr; }
+      .media-grid { grid-template-columns: 1fr 1fr; }
+      .twin-inner { grid-template-columns: 1fr; gap: 40px; }
+      .twin-visual { height: 260px; order: -1; }
+      .twin-disc { width: 200px; height: 200px; }
+      .twin-orbit-1 { width: 260px; height: 260px; }
+
+      .speak-box { grid-template-columns: 1fr; padding: 48px 28px; }
+      .speak-ctas { align-items: flex-start; flex-direction: row; }
+
+      section { padding: 72px 0; }
+      .container { padding: 0 24px; }
+      footer { padding: 36px 24px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+    @media (max-width: 600px) {
+      .speaking-grid { grid-template-columns: 1fr; }
+      .media-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-dot"></span>
+    [Name]
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="#">Tech Lab</a></li>
+    <li><a href="#">Learn</a></li>
+    <li><a href="#">Connect</a></li>
+  </ul>
+  <a href="#" class="btn btn-primary nav-cta-desktop" style="padding:9px 18px; font-size:13px;">Try AI Twin →</a>
+  <button class="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── PAGE SUB-NAV ──────────────────────────────────────── -->
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="#intro" class="active">Intro</a>
+    <a href="#mission">Mission</a>
+    <a href="#credentials">Credentials</a>
+    <a href="#ai-twin">AI Twin</a>
+  </div>
+</div>
+
+
+<!-- ── HERO / INTRO ──────────────────────────────────────── -->
+<div class="hero" id="intro">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- Photo -->
+      <div class="photo-wrap">
+        <div class="photo-frame">
+          <span class="photo-label">[ Photo of [Name] ]</span>
+        </div>
+        <div class="photo-badge">
+          <span class="photo-badge-val">[X]+</span>
+          <span class="photo-badge-label">Talks given</span>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <div>
+        <div class="hero-tags">
+          <span class="tag tag-accent">AI & Humanity</span>
+          <span class="tag">Speaker</span>
+          <span class="tag">Educator</span>
+          <span class="tag">Author</span>
+          <span class="tag">Researcher</span>
+        </div>
+        <div class="label">About</div>
+        <h1>[Name]</h1>
+        <p style="font-size:18px; color:var(--accent-light); margin-top:8px; font-weight:500;">[Title / Role — e.g. "AI Strategist & Future of Learning Advocate"]</p>
+        <p class="hero-bio">
+          [Name] is a [role] dedicated to making artificial intelligence understandable,
+          accessible, and human-centred. With [X] years at the intersection of technology
+          and education, [he/she/they] has helped [institutions / organisations] navigate
+          the AI transformation — not with fear, but with clarity and purpose.
+        </p>
+        <div class="hero-ctas">
+          <a href="#ai-twin" class="btn btn-primary btn-lg">Talk to My AI Twin →</a>
+          <a href="#credentials" class="btn btn-outline btn-lg">See My Work</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ── STATS STRIP ────────────────────────────────────────── -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-number">[X]+</div>
+      <div class="stat-label">Talks &amp; Keynotes</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">[X]</div>
+      <div class="stat-label">Countries Reached</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">[X]M+</div>
+      <div class="stat-label">People Impacted</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">[X]</div>
+      <div class="stat-label">Years in the Field</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── MISSION ───────────────────────────────────────────── -->
+<section id="mission">
+  <div class="container">
+    <div class="mission-grid">
+      <div>
+        <div class="label">Mission</div>
+        <h2 style="margin-bottom: 28px;">Why I built this.</h2>
+        <div class="mission-body">
+          <p>
+            Most conversations about AI swing between two extremes — uncritical hype
+            or existential panic. Neither helps the people who actually need to make
+            decisions: teachers redesigning curricula, students choosing careers,
+            leaders navigating change.
+          </p>
+          <p>
+            I built this platform to be a third option: grounded, curious, and
+            accessible. A space where the technology doesn't just get explained —
+            it gets <em>experienced</em>.
+          </p>
+          <p>
+            [Name] — [short personal detail, e.g. "based in Singapore, working globally"]
+          </p>
+        </div>
+      </div>
+      <div class="mission-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">🔬</div>
+          <div class="pillar-text">
+            <h3>Make it tangible</h3>
+            <p>Don't just talk about AI — show it. Every idea on this site is paired with something you can experience directly.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤝</div>
+          <div class="pillar-text">
+            <h3>Keep the human in the room</h3>
+            <p>Technology only matters in relation to people. Every piece of content returns to the human question: so what does this mean for us?</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🧭</div>
+          <div class="pillar-text">
+            <h3>Reduce the gap</h3>
+            <p>Between what experts know and what everyone else hears. Between potential and preparedness. That gap is the work.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CREDENTIALS ───────────────────────────────────────── -->
+<section id="credentials" class="cred-section">
+  <div class="container">
+    <div class="label">Credentials</div>
+    <h2 style="margin-bottom: 36px;">The work behind the words.</h2>
+
+    <div class="cred-tabs">
+      <button class="cred-tab active">Speaking</button>
+      <button class="cred-tab">Media &amp; Press</button>
+    </div>
+
+    <!-- Speaking grid -->
+    <div class="speaking-grid">
+      <div class="speaking-card">
+        <div class="speaking-card-event">Keynote</div>
+        <h3>[Talk Title — Placeholder]</h3>
+        <p class="speaking-card-meta">[Conference Name] · [Year] · [City]</p>
+      </div>
+      <div class="speaking-card">
+        <div class="speaking-card-event">Panel</div>
+        <h3>[Talk Title — Placeholder]</h3>
+        <p class="speaking-card-meta">[Conference Name] · [Year] · [City]</p>
+      </div>
+      <div class="speaking-card">
+        <div class="speaking-card-event">Workshop</div>
+        <h3>[Talk Title — Placeholder]</h3>
+        <p class="speaking-card-meta">[Institution Name] · [Year]</p>
+      </div>
+      <div class="speaking-card">
+        <div class="speaking-card-event">Keynote</div>
+        <h3>[Talk Title — Placeholder]</h3>
+        <p class="speaking-card-meta">[Conference Name] · [Year] · [City]</p>
+      </div>
+      <div class="speaking-card">
+        <div class="speaking-card-event">Guest Lecture</div>
+        <h3>[Talk Title — Placeholder]</h3>
+        <p class="speaking-card-meta">[University Name] · [Year]</p>
+      </div>
+      <div class="speaking-card">
+        <div class="speaking-card-event">Podcast</div>
+        <h3>[Talk Title — Placeholder]</h3>
+        <p class="speaking-card-meta">[Show Name] · [Year]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── AI TWIN TEASER ─────────────────────────────────────── -->
+<section id="ai-twin" class="twin-section">
+  <div class="twin-glow"></div>
+  <div class="container">
+    <div class="twin-inner">
+
+      <div class="twin-visual">
+        <div class="twin-orbit twin-orbit-1"><div class="twin-orbit-dot"></div></div>
+        <div class="twin-disc">
+          <div class="twin-label">
+            <strong>AI Twin</strong>
+            [Name] as an<br>AI avatar
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">AI Twin</div>
+        <h2 style="margin-bottom: 16px;">Don't just read about me.<br><span class="gradient-text">Talk to me.</span></h2>
+        <p style="font-size:17px; color:var(--text-muted); margin-bottom:0;">
+          My AI Twin is trained on my talks, writing, and thinking. Ask it anything —
+          about AI, education, the future, or what I'd recommend for your situation.
+        </p>
+        <div class="twin-features">
+          <div class="twin-feature"><span class="twin-feature-dot"></span> Voice and text conversation</div>
+          <div class="twin-feature"><span class="twin-feature-dot"></span> Draws on my actual content and perspectives</div>
+          <div class="twin-feature"><span class="twin-feature-dot"></span> Available as 3D avatar or chat interface</div>
+          <div class="twin-feature"><span class="twin-feature-dot"></span> Free to try — no sign-up required</div>
+        </div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="#" class="btn btn-primary btn-lg">Try the AI Twin →</a>
+          <a href="#" class="btn btn-outline btn-lg">How it works</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── SPEAKING CTA ───────────────────────────────────────── -->
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="speak-box">
+      <div>
+        <div class="label">Work Together</div>
+        <h2>Invite [Name] to speak.</h2>
+        <p>Available for keynotes, panels, workshops, and institutional partnerships on AI, education, and the future of learning.</p>
+      </div>
+      <div class="speak-ctas">
+        <a href="#" class="btn btn-primary btn-lg">Get in Touch →</a>
+        <a href="#" class="btn btn-outline btn-lg">Download Bio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-dot"></span>
+      [Name]
+    </a>
+    <ul class="footer-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="#">Tech Lab</a></li>
+      <li><a href="#">Learn</a></li>
+      <li><a href="#">Connect</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+    <span class="footer-copy">© 2025 [Name]. All rights reserved.</span>
+  </div>
+</footer>
+
+
+<!-- ── FLOATING CHAT ──────────────────────────────────────── -->
+<div class="chat-fab">
+  <div class="chat-tooltip">Chat with [Name]'s AI</div>
+  <button class="chat-btn" aria-label="Open AI chat">💬</button>
+</div>
+
+
+<script>
+  // Sub-nav active state on scroll
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.subnav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 140) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // Credential tab switching (visual only for prototype)
+  document.querySelectorAll('.cred-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.cred-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
+```
