@@ -134,7 +134,15 @@
       text-decoration: none;
       letter-spacing: -0.01em;
     }
-    .nav-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--grad); flex-shrink: 0; }
+    .nav-logo-mark { flex-shrink: 0; display: block; }
+    .nav-x {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 300;
+      margin: 0 1px;
+    }
     .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
     .nav-links a {
       color: var(--text-muted);
@@ -710,11 +718,21 @@
 <!-- ── NAV ──────────────────────────────────────────────── -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <span class="nav-dot"></span>
-    [Name]
+    <svg class="nav-logo-mark" width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="9" cy="9" r="9" fill="url(#anlg1)" fill-opacity="0.9"/>
+      <circle cx="19" cy="9" r="9" fill="url(#anlg2)" fill-opacity="0.75"/>
+      <defs>
+        <linearGradient id="anlg1" x1="0" y1="0" x2="18" y2="18" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/>
+        </linearGradient>
+        <linearGradient id="anlg2" x1="10" y1="0" x2="28" y2="18" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    AI <span class="nav-x">×</span> Humanity
   </a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
     <li><a href="about.html" class="active">About</a></li>
     <li><a href="#">Tech Lab</a></li>
     <li><a href="#">Learn</a></li>
@@ -968,8 +986,19 @@
 <footer>
   <div class="footer-inner">
     <a href="index.html" class="nav-logo">
-      <span class="nav-dot"></span>
-      [Name]
+      <svg class="nav-logo-mark" width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="9" cy="9" r="9" fill="url(#aflg1)" fill-opacity="0.9"/>
+        <circle cx="19" cy="9" r="9" fill="url(#aflg2)" fill-opacity="0.75"/>
+        <defs>
+          <linearGradient id="aflg1" x1="0" y1="0" x2="18" y2="18" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/>
+          </linearGradient>
+          <linearGradient id="aflg2" x1="10" y1="0" x2="28" y2="18" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      AI <span class="nav-x">×</span> Humanity
     </a>
     <ul class="footer-links">
       <li><a href="about.html">About</a></li>
