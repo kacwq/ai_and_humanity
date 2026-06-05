@@ -91,6 +91,9 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; font-weight: 300; margin: 0 1px;
     }
+    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+    .nav-logo-name { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; line-height: 1; }
+    .nav-by { font-size: 10px; font-weight: 500; color: var(--text-dim); letter-spacing: 0.05em; line-height: 1; }
     .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
     .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.15s; }
     .nav-links a:hover { color: var(--text); }
@@ -233,6 +236,23 @@
     }
     .accordion-body-inner ol { padding-left: 18px; }
     .accordion-body-inner ol li { margin-bottom: 8px; }
+
+    /* Concept intro box */
+    .concept-box {
+      display: flex; align-items: flex-start; gap: 18px;
+      background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.2);
+      border-radius: var(--radius); padding: 20px 24px; margin-bottom: 28px;
+    }
+    .concept-number {
+      font-size: 34px; font-weight: 900; line-height: 1; flex-shrink: 0; padding-top: 2px;
+      background: var(--grad-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .concept-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: 6px; display: block;
+    }
+    .concept-def { font-size: 15px; color: var(--text); line-height: 1.65; }
 
     /* Why this matters callout */
     .why-matters {
@@ -587,14 +607,15 @@
         </linearGradient>
       </defs>
     </svg>
-    AI <span class="nav-x">×</span> Humanity
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">AI <span class="nav-x">×</span> Humanity</span>
+      <span class="nav-by">by Videospace</span>
+    </div>
   </a>
   <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
     <li><a href="tech-lab.html" class="active">Tech Lab</a></li>
-    <li><a href="learn.html">Learn</a></li>
   </ul>
-  <a href="#avatar" class="btn btn-primary nav-cta-desktop" style="padding:9px 18px; font-size:13px;">Try AI Twin →</a>
+  <a href="index.html" class="btn btn-primary nav-cta-desktop" style="padding:9px 18px; font-size:13px;">← Back to Home</a>
   <button class="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -603,10 +624,10 @@
 <!-- ── FEATURE NAV ───────────────────────────────────────── -->
 <div class="feature-nav">
   <div class="feature-nav-inner">
-    <a href="#avatar"    class="fnav-item active"><span class="fnav-num">01</span> 3D Avatar</a>
-    <a href="#chatbot"   class="fnav-item"><span class="fnav-num">02</span> AI Chatbot</a>
-    <a href="#videogen"  class="fnav-item"><span class="fnav-num">03</span> Video Generation</a>
-    <a href="#search"    class="fnav-item"><span class="fnav-num">04</span> Video Search</a>
+    <a href="#avatar"    class="fnav-item active"><span class="fnav-num">01</span> The Presence</a>
+    <a href="#chatbot"   class="fnav-item"><span class="fnav-num">02</span> The Dialogue</a>
+    <a href="#videogen"  class="fnav-item"><span class="fnav-num">03</span> The Story</a>
+    <a href="#search"    class="fnav-item"><span class="fnav-num">04</span> The Memory</a>
   </div>
 </div>
 
@@ -627,29 +648,29 @@
         <a href="#avatar" class="feature-card-link">
           <div class="fc-num">01</div>
           <div class="fc-icon">🧬</div>
-          <div class="fc-title">3D Avatar</div>
-          <div class="fc-desc">Meet [Name]'s digital twin in real time</div>
-          <span class="fc-arrow">Try it →</span>
+          <div class="fc-title">The Presence</div>
+          <div class="fc-desc">A 3D digital twin — one person, everywhere at once</div>
+          <span class="fc-arrow">Experience →</span>
         </a>
         <a href="#chatbot" class="feature-card-link">
           <div class="fc-num">02</div>
           <div class="fc-icon">💬</div>
-          <div class="fc-title">AI Chatbot</div>
-          <div class="fc-desc">Ask anything by voice or text</div>
-          <span class="fc-arrow">Start chatting →</span>
+          <div class="fc-title">The Dialogue</div>
+          <div class="fc-desc">Ask anything — by voice or text — get answers in their voice</div>
+          <span class="fc-arrow">Start talking →</span>
         </a>
         <a href="#videogen" class="feature-card-link">
           <div class="fc-num">03</div>
           <div class="fc-icon">🎬</div>
-          <div class="fc-title">Video Generation</div>
-          <div class="fc-desc">AI-generated video with digital presenter</div>
+          <div class="fc-title">The Story</div>
+          <div class="fc-desc">Text in, finished video out — no studio required</div>
           <span class="fc-arrow">Watch demo →</span>
         </a>
         <a href="#search" class="feature-card-link">
           <div class="fc-num">04</div>
           <div class="fc-icon">🔍</div>
-          <div class="fc-title">Video Search</div>
-          <div class="fc-desc">Search hours of content by question</div>
+          <div class="fc-title">The Memory</div>
+          <div class="fc-desc">Find any idea across hours of content instantly</div>
           <span class="fc-arrow">Search now →</span>
         </a>
       </div>
@@ -668,8 +689,15 @@
 
       <!-- Content -->
       <div class="tech-content">
-        <div class="label">Experience 01</div>
-        <h2>Meet [Name]'s<br><span class="gradient-text">Digital Twin</span></h2>
+        <div class="label">The Presence</div>
+        <div class="concept-box">
+          <div class="concept-number">01</div>
+          <div>
+            <span class="concept-label">What is a 3D Digital Twin?</span>
+            <p class="concept-def">A lifelike digital replica of a real person that speaks, responds, and expresses emotions in real time — without the person ever needing to be in the room.</p>
+          </div>
+        </div>
+        <h2>One person.<br><span class="gradient-text">Everywhere at once.</span></h2>
         <div class="tech-body">
           <p>
             A photorealistic 3D avatar, built from [Name]'s voice, likeness, and thinking.
@@ -803,8 +831,15 @@
 
       <!-- Content -->
       <div class="tech-content">
-        <div class="label">Experience 02</div>
-        <h2>Ask anything.<br><span class="gradient-text">By voice or text.</span></h2>
+        <div class="label">The Dialogue</div>
+        <div class="concept-box">
+          <div class="concept-number">02</div>
+          <div>
+            <span class="concept-label">What is an AI Knowledge Chatbot?</span>
+            <p class="concept-def">A conversational AI trained on a specific person's content — their talks, writing, and ideas — so you can ask questions and get answers in their voice and perspective, anytime.</p>
+          </div>
+        </div>
+        <h2>Knowledge as<br><span class="gradient-text">a conversation.</span></h2>
         <div class="tech-body">
           <p>
             [Name]'s AI chatbot is trained on his talks, writing, podcast episodes, and
@@ -859,8 +894,15 @@
 
       <!-- Content -->
       <div class="tech-content">
-        <div class="label">Experience 03</div>
-        <h2>AI-generated video<br>with a <span class="gradient-text">digital presenter.</span></h2>
+        <div class="label">The Story</div>
+        <div class="concept-box">
+          <div class="concept-number">03</div>
+          <div>
+            <span class="concept-label">What is AI Video Generation?</span>
+            <p class="concept-def">Technology that converts a text script into a finished video, with a digital presenter delivering it — no camera, no studio, no scheduling needed.</p>
+          </div>
+        </div>
+        <h2>Any script.<br><span class="gradient-text">Any language. Any scale.</span></h2>
         <div class="tech-body">
           <p>
             Type a script — or let AI write one from your topic — and watch [Name]'s
@@ -998,8 +1040,15 @@
 
       <!-- Content -->
       <div class="tech-content">
-        <div class="label">Experience 04</div>
-        <h2>Search across everything<br><span class="gradient-text">[Name] has ever said.</span></h2>
+        <div class="label">The Memory</div>
+        <div class="concept-box">
+          <div class="concept-number">04</div>
+          <div>
+            <span class="concept-label">What is Semantic Video Search?</span>
+            <p class="concept-def">A search engine that understands what you mean, not just what you type. It finds the exact moment in hours of video, audio, or text where your question is answered.</p>
+          </div>
+        </div>
+        <h2>Every answer,<br><span class="gradient-text">instantly findable.</span></h2>
         <div class="tech-body">
           <p>
             Instead of scrolling through hours of video, type a question and get
@@ -1053,8 +1102,8 @@
       <h2>This is what<br><span class="gradient-text">AI × Humanity</span> looks like.</h2>
       <p>Not a prediction. Not a concept. A lived demonstration of what becomes possible when AI amplifies human knowledge — making it more accessible, more personal, and more present than ever before.</p>
       <div class="cta-btns">
-        <a href="about.html" class="btn btn-primary btn-lg">Meet [Name] →</a>
-        <a href="learn.html" class="btn btn-outline btn-lg">Explore the ideas behind the tech</a>
+        <a href="index.html" class="btn btn-primary btn-lg">Back to AI × Humanity →</a>
+        <a href="https://youtube.com/playlist?list=PLbXgTi79jSSYXAEDVQWSCwgsC6CGgVaLy" target="_blank" rel="noopener" class="btn btn-outline btn-lg">Listen to the Podcast</a>
       </div>
     </div>
   </div>
@@ -1077,22 +1126,24 @@
           </linearGradient>
         </defs>
       </svg>
-      AI <span class="nav-x">×</span> Humanity
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">AI <span class="nav-x">×</span> Humanity</span>
+        <span class="nav-by">by Videospace</span>
+      </div>
     </a>
     <ul class="footer-links">
-      <li><a href="about.html">About</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="tech-lab.html">Tech Lab</a></li>
-      <li><a href="learn.html">Learn</a></li>
-        <li><a href="#">Privacy</a></li>
+      <li><a href="https://youtube.com/playlist?list=PLbXgTi79jSSYXAEDVQWSCwgsC6CGgVaLy" target="_blank" rel="noopener">Podcast</a></li>
     </ul>
-    <span class="footer-copy">© 2025 [Name]. All rights reserved.</span>
+    <span class="footer-copy">© 2025 Videospace. All rights reserved.</span>
   </div>
 </footer>
 
 
 <!-- ── FLOATING CHAT ──────────────────────────────────────── -->
 <div class="chat-fab">
-  <div class="chat-tooltip">Chat with [Name]'s AI</div>
+  <div class="chat-tooltip">Chat with the AI</div>
   <button class="chat-btn" aria-label="Open AI chat">💬</button>
 </div>
 

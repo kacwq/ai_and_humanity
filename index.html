@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[Name] — AI & Humanity</title>
+  <title>AI × Humanity — by Videospace</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* ─── Design Tokens ─────────────────────────────────── */
+    /* ─── Tokens ─────────────────────────────────────────── */
     :root {
       --bg:            #080810;
       --bg-card:       #10101A;
@@ -24,666 +24,192 @@
       --radius:        12px;
       --radius-lg:     20px;
     }
-
-    /* ─── Reset ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; overflow-x: hidden; }
 
-    /* ─── Typography ─────────────────────────────────────── */
-    h1 {
-      font-size: clamp(44px, 7vw, 88px);
-      font-weight: 900;
-      line-height: 1.04;
-      letter-spacing: -0.03em;
-    }
-    h2 {
-      font-size: clamp(30px, 4vw, 52px);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
+    /* ─── Type ───────────────────────────────────────────── */
+    h1 { font-size: clamp(52px, 8vw, 108px); font-weight: 900; line-height: 0.97; letter-spacing: -0.04em; }
+    h2 { font-size: clamp(28px, 4vw, 52px); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
     h3 { font-size: 18px; font-weight: 700; }
+    .gradient-text { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .label { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 18px; }
+    .label::before { content: ''; display: block; width: 16px; height: 2px; background: var(--accent-light); border-radius: 2px; }
 
-    .gradient-text {
-      background: var(--grad-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent-light);
-      margin-bottom: 18px;
-    }
-    .label::before {
-      content: '';
-      display: block;
-      width: 16px;
-      height: 2px;
-      background: var(--accent-light);
-      border-radius: 2px;
-    }
-
-    /* ─── Buttons ─────────────────────────────────────────── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 11px 22px;
-      border-radius: 9px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border: none;
-      font-family: inherit;
-    }
-    .btn-primary {
-      background: var(--grad);
-      color: #fff;
-      box-shadow: 0 4px 24px rgba(124,58,237,0.35);
-    }
+    /* ─── Buttons ────────────────────────────────────────── */
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 9px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.2s ease; border: none; font-family: inherit; }
+    .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 4px 24px rgba(124,58,237,0.35); }
     .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
-    .btn-ghost {
-      color: var(--text);
-      background: transparent;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: rgba(255,255,255,0.25);
-    }
-    .btn-ghost:hover { text-decoration-color: rgba(255,255,255,0.6); }
-    .btn-outline {
-      border: 1px solid var(--border-hover);
-      color: var(--text);
-      background: rgba(255,255,255,0.03);
-    }
+    .btn-outline { border: 1px solid var(--border-hover); color: var(--text); background: rgba(255,255,255,0.03); }
     .btn-outline:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.25); }
     .btn-lg { padding: 15px 30px; font-size: 16px; border-radius: 11px; }
 
-    /* ─── Layout Helpers ─────────────────────────────────── */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
+    /* ─── Layout ─────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     section { padding: 100px 0; }
 
     /* ─── Nav ────────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      padding: 0 40px;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(8,8,16,0.75);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 40px; height: 68px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,8,16,0.75); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
     .nav-logo-mark { flex-shrink: 0; display: block; }
-    .nav-x {
-      background: var(--grad-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: 300;
-      margin: 0 1px;
-    }
-    .nav-dot {
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      background: var(--grad);
-      flex-shrink: 0;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: color 0.15s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .hamburger span {
-      display: block;
-      width: 22px; height: 2px;
-      background: var(--text-muted);
-      border-radius: 2px;
-      transition: background 0.2s;
-    }
+    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+    .nav-logo-name { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; line-height: 1; }
+    .nav-x { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 300; margin: 0 1px; }
+    .nav-by { font-size: 10px; color: var(--text-dim); font-weight: 500; letter-spacing: 0.04em; line-height: 1; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-muted); border-radius: 2px; }
 
     /* ─── Hero ───────────────────────────────────────────── */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 68px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-glow-1 {
-      position: absolute;
-      top: -160px; right: -180px;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 68%);
-      pointer-events: none;
-    }
-    .hero-glow-2 {
-      position: absolute;
-      bottom: -80px; left: -80px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(236,72,153,0.09) 0%, transparent 68%);
-      pointer-events: none;
-    }
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      width: 100%;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-content { position: relative; }
-    .hero-sub {
-      font-size: 18px;
-      color: var(--text-muted);
-      line-height: 1.75;
-      margin-top: 22px;
-      max-width: 460px;
-    }
-    .hero-ctas {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-top: 38px;
-      flex-wrap: wrap;
-    }
+    .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 68px; position: relative; overflow: hidden; }
+    .hero-glow-1 { position: absolute; top: -100px; right: -200px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 68%); pointer-events: none; }
+    .hero-glow-2 { position: absolute; bottom: -50px; left: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(236,72,153,0.07) 0%, transparent 68%); pointer-events: none; }
+    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
+    .hero-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 24px; }
+    .hero-sub { font-size: 18px; color: var(--text-muted); line-height: 1.75; margin-top: 24px; max-width: 480px; }
+    .hero-ctas { display: flex; align-items: center; gap: 14px; margin-top: 40px; flex-wrap: wrap; }
 
-    /* Avatar visual */
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 520px;
-      position: relative;
+    /* Venn visual */
+    .venn-wrap { display: flex; justify-content: center; align-items: center; height: 480px; position: relative; }
+    .venn { position: relative; width: 320px; height: 240px; }
+    .venn-circle {
+      position: absolute; width: 220px; height: 220px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
     }
-    .avatar-shell {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .venn-ai {
+      left: 0; top: 50%; transform: translateY(-50%);
+      background: rgba(99,102,241,0.18); border: 1px solid rgba(99,102,241,0.35);
+      color: rgba(165,180,252,0.7);
+      animation: breathe-l 4s ease-in-out infinite;
     }
-    .orbit { position: absolute; border-radius: 50%; border: 1px solid var(--border); }
-    .orbit-1 { width: 380px; height: 380px; animation: spin 22s linear infinite; }
-    .orbit-2 { width: 460px; height: 460px; animation: spin 34s linear infinite reverse; border-style: dashed; opacity: 0.5; }
-    .orbit-dot {
-      position: absolute;
-      width: 8px; height: 8px;
+    .venn-human {
+      right: 0; top: 50%; transform: translateY(-50%);
+      background: rgba(236,72,153,0.14); border: 1px solid rgba(236,72,153,0.3);
+      color: rgba(244,114,182,0.7);
+      animation: breathe-r 4s ease-in-out infinite 0.5s;
+    }
+    .venn-intersection {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 96px; height: 150px;
+      background: linear-gradient(180deg, rgba(124,58,237,0.3), rgba(236,72,153,0.2));
       border-radius: 50%;
-      background: var(--accent-light);
-      top: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      box-shadow: 0 0 12px var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 4px;
+      animation: breathe-c 4s ease-in-out infinite 0.25s;
+      z-index: 2;
     }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .venn-x { font-size: 28px; font-weight: 900; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .venn-caption { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-light); }
+    @keyframes breathe-l { 0%,100%{transform:translateY(-50%) scale(1)} 50%{transform:translateY(-50%) scale(1.04)} }
+    @keyframes breathe-r { 0%,100%{transform:translateY(-50%) scale(1)} 50%{transform:translateY(-50%) scale(1.04)} }
+    @keyframes breathe-c { 0%,100%{opacity:0.8;transform:translate(-50%,-50%) scale(1)} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.06)} }
 
-    .avatar-disc {
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 38% 32%, rgba(124,58,237,0.45), rgba(236,72,153,0.18) 60%, transparent 80%);
-      border: 1px solid rgba(124,58,237,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .avatar-disc::after {
-      content: '';
-      position: absolute;
-      inset: -24px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
-      animation: breathe 3.5s ease-in-out infinite;
-    }
-    @keyframes breathe {
-      0%, 100% { opacity: 0.5; transform: scale(1); }
-      50%       { opacity: 1;   transform: scale(1.06); }
-    }
-    .avatar-label {
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-    }
-    .avatar-label strong {
-      display: block;
-      font-size: 15px;
-      color: var(--accent-light);
-      margin-bottom: 6px;
-    }
+    .venn-labels { position: absolute; width: 100%; display: flex; justify-content: space-between; top: 50%; transform: translateY(-50%); pointer-events: none; }
+    .venn-label { font-size: 10px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
 
-    /* Floating badge */
-    .hero-badge {
-      position: absolute;
-      bottom: 100px;
-      right: 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-hover);
-      border-radius: 12px;
-      padding: 14px 18px;
-      font-size: 13px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      backdrop-filter: blur(8px);
-      animation: float 4s ease-in-out infinite;
+    /* Floating badges around venn */
+    .venn-badge {
+      position: absolute; background: var(--bg-card); border: 1px solid var(--border-hover);
+      border-radius: 10px; padding: 10px 14px; font-size: 12px; font-weight: 600;
+      color: var(--text-muted); white-space: nowrap; animation: float 4s ease-in-out infinite;
     }
-    .hero-badge-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #22C55E;
-      box-shadow: 0 0 8px #22C55E;
-      flex-shrink: 0;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-8px); }
-    }
+    .vb-1 { top: 10%; left: -10%; animation-delay: 0s; }
+    .vb-2 { top: 10%; right: -10%; animation-delay: 1s; }
+    .vb-3 { bottom: 12%; left: 5%; animation-delay: 0.5s; }
+    .vb-4 { bottom: 12%; right: 5%; animation-delay: 1.5s; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
-    /* ─── Trust Bar ──────────────────────────────────────── */
-    .trust-bar {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: rgba(255,255,255,0.015);
-      padding: 22px 40px;
-      display: flex;
-      align-items: center;
-      gap: 48px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .trust-bar::-webkit-scrollbar { display: none; }
-    .trust-eyebrow {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .trust-divider {
-      width: 1px;
-      height: 18px;
-      background: var(--border);
-      flex-shrink: 0;
-    }
-    .trust-item {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-muted);
-      white-space: nowrap;
-      flex-shrink: 0;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-    }
-    .trust-item:hover { opacity: 1; }
+    /* ─── Question Section ───────────────────────────────── */
+    .question-section { border-top: 1px solid var(--border); }
+    .question-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .big-question { font-size: clamp(48px, 7vw, 88px); font-weight: 900; line-height: 1; letter-spacing: -0.04em; }
+    .question-or { display: block; font-size: clamp(18px, 2.5vw, 28px); color: var(--text-dim); font-weight: 400; margin: 12px 0; letter-spacing: -0.01em; }
+    .question-body { font-size: 17px; color: var(--text-muted); line-height: 1.85; }
+    .question-body p + p { margin-top: 16px; }
+    .idea-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+    .idea-item { display: flex; gap: 16px; align-items: flex-start; padding: 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); transition: border-color 0.2s; }
+    .idea-item:hover { border-color: var(--border-hover); }
+    .idea-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .idea-item h3 { font-size: 15px; margin-bottom: 4px; }
+    .idea-item p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
-    /* ─── Why Section ────────────────────────────────────── */
-    .why-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 100px;
-      align-items: center;
-    }
-    .why-stat-number {
-      font-size: clamp(64px, 9vw, 108px);
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -0.04em;
-      background: var(--grad-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .why-stat-desc {
-      font-size: 17px;
-      color: var(--text-muted);
-      margin-top: 12px;
-      line-height: 1.5;
-    }
-    .why-body { font-size: 17px; color: var(--text-muted); line-height: 1.85; }
-    .why-body p + p { margin-top: 16px; }
-
-    /* ─── Tech Strip ─────────────────────────────────────── */
-    .tech-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 44px;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-    .tech-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 30px 26px 26px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      position: relative;
-      overflow: hidden;
-      text-decoration: none;
-      display: block;
-    }
-    .tech-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--grad);
-      opacity: 0;
-      transition: opacity 0.25s;
-    }
-    .tech-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-hover);
-      transform: translateY(-5px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-    }
+    /* ─── Tech Preview ───────────────────────────────────── */
+    .tech-preview { border-top: 1px solid var(--border); background: rgba(255,255,255,0.01); }
+    .tech-preview-header { text-align: center; margin-bottom: 56px; }
+    .tech-preview-header p { font-size: 18px; color: var(--text-muted); margin-top: 14px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .tech-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 22px; text-decoration: none; color: var(--text); transition: all 0.2s; display: block; position: relative; overflow: hidden; }
+    .tech-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--grad); opacity: 0; transition: opacity 0.2s; }
+    .tech-card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); transform: translateY(-4px); }
     .tech-card:hover::before { opacity: 1; }
-    .tech-icon {
-      width: 48px; height: 48px;
-      border-radius: 12px;
-      background: rgba(124,58,237,0.14);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 18px;
-    }
-    .tech-card h3 { font-size: 16px; margin-bottom: 8px; color: var(--text); }
-    .tech-card p {
-      font-size: 13.5px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 18px;
-    }
-    .tech-link {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent-light);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
+    .tc-number { font-size: 11px; font-weight: 700; color: var(--text-dim); letter-spacing: 0.08em; margin-bottom: 16px; }
+    .tc-icon { font-size: 32px; margin-bottom: 14px; }
+    .tc-concept { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 6px; }
+    .tc-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .tc-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 18px; }
+    .tc-link { font-size: 13px; font-weight: 600; color: var(--accent-light); display: inline-flex; align-items: center; gap: 4px; }
 
-    /* ─── Quote ──────────────────────────────────────────── */
-    .quote-wrap {
-      max-width: 820px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative;
+    /* ─── The Expert ─────────────────────────────────────── */
+    .expert-section { border-top: 1px solid var(--border); }
+    .expert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .expert-photo {
+      aspect-ratio: 3/4; max-width: 360px;
+      border-radius: 20px;
+      background: linear-gradient(160deg, rgba(124,58,237,0.22) 0%, rgba(99,102,241,0.1) 40%, rgba(8,8,16,0.9) 100%);
+      border: 1px solid rgba(124,58,237,0.18);
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      padding-bottom: 28px; position: relative; overflow: hidden;
     }
-    .quote-mark {
-      font-size: 140px;
-      line-height: 1;
-      color: rgba(124,58,237,0.15);
-      font-family: Georgia, serif;
-      position: absolute;
-      top: -50px; left: -10px;
-      user-select: none;
-    }
-    blockquote {
-      font-size: clamp(22px, 3vw, 36px);
-      font-weight: 700;
-      line-height: 1.45;
-      letter-spacing: -0.02em;
-      position: relative;
-      z-index: 1;
-      margin-bottom: 28px;
-    }
-    .quote-attr {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-    .quote-attr strong { color: var(--text); }
+    .expert-photo::before { content: ''; position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, rgba(124,58,237,0.4), rgba(236,72,153,0.2)); border: 1px solid rgba(124,58,237,0.3); }
+    .expert-photo::after { content: ''; position: absolute; top: calc(15% + 90px); left: 50%; transform: translateX(-50%); width: 160px; height: 180px; border-radius: 50% 50% 0 0; background: linear-gradient(180deg, rgba(124,58,237,0.18), transparent); }
+    .expert-photo-label { font-size: 12px; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; position: relative; z-index: 1; }
+    .expert-name { font-size: clamp(28px, 3vw, 42px); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .expert-title { font-size: 15px; color: var(--accent-light); font-weight: 500; margin-bottom: 20px; }
+    .expert-bio { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 32px; }
 
-    /* ─── Learn Preview ──────────────────────────────────── */
-    .learn-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .learn-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-    .learn-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      text-decoration: none;
-      display: block;
-      color: var(--text);
-    }
-    .learn-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--border-hover);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-    }
-    .learn-thumb {
-      height: 156px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 42px;
-      position: relative;
-    }
-    .learn-thumb-podcast { background: linear-gradient(135deg, #1a1533 0%, #0f0f23 100%); }
-    .learn-thumb-ebook   { background: linear-gradient(135deg, #0d1b2a 0%, #1a1533 100%); }
-    .learn-thumb-library { background: linear-gradient(135deg, #120a26 0%, #0f0f23 100%); }
-    .learn-thumb-badge {
-      position: absolute;
-      top: 14px; left: 14px;
-      background: rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 6px;
-      padding: 4px 10px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-light);
-    }
-    .learn-card-body { padding: 22px; }
-    .learn-card-body h3 { font-size: 16px; margin-bottom: 8px; }
-    .learn-card-body p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+    /* Content cards */
+    .content-cards { display: flex; flex-direction: column; gap: 14px; }
+    .content-card { display: flex; gap: 16px; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; text-decoration: none; color: var(--text); transition: all 0.2s; }
+    .content-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); transform: translateX(4px); }
+    .content-card-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .cc-book { background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(124,58,237,0.15)); }
+    .cc-podcast { background: linear-gradient(135deg, rgba(236,72,153,0.2), rgba(139,92,246,0.15)); }
+    .content-card-text { flex: 1; min-width: 0; }
+    .cc-type { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 3px; }
+    .cc-title { font-size: 14px; font-weight: 600; line-height: 1.35; }
+    .cc-meta { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+    .cc-arrow { font-size: 16px; color: var(--text-dim); flex-shrink: 0; transition: transform 0.2s; }
+    .content-card:hover .cc-arrow { transform: translateX(4px); color: var(--accent-light); }
 
-    /* ─── Final CTA ──────────────────────────────────────── */
+    /* ─── Closing CTA ────────────────────────────────────── */
+    .closing-cta { border-top: 1px solid var(--border); }
     .cta-box {
-      background: linear-gradient(135deg,
-        rgba(99,102,241,0.1) 0%,
-        rgba(139,92,246,0.1) 50%,
-        rgba(236,72,153,0.07) 100%);
-      border: 1px solid rgba(124,58,237,0.22);
-      border-radius: 24px;
-      padding: 88px 60px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1), rgba(236,72,153,0.07));
+      border: 1px solid rgba(124,58,237,0.22); border-radius: 24px;
+      padding: 88px 60px; text-align: center; position: relative; overflow: hidden;
     }
-    .cta-box::before {
-      content: '';
-      position: absolute;
-      top: -120px; left: 50%;
-      transform: translateX(-50%);
-      width: 600px; height: 300px;
-      background: radial-gradient(ellipse, rgba(124,58,237,0.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
+    .cta-box::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(124,58,237,0.15) 0%, transparent 70%); pointer-events: none; }
     .cta-box h2 { margin-bottom: 14px; position: relative; }
-    .cta-box .sub {
-      font-size: 17px;
-      color: var(--text-muted);
-      margin-bottom: 44px;
-      position: relative;
-    }
-    .email-row {
-      display: flex;
-      gap: 10px;
-      max-width: 420px;
-      margin: 0 auto 20px;
-      position: relative;
-    }
-    .email-input {
-      flex: 1;
-      padding: 14px 18px;
-      border-radius: 10px;
-      border: 1px solid var(--border-hover);
-      background: rgba(255,255,255,0.05);
-      color: var(--text);
-      font-size: 15px;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .email-input::placeholder { color: var(--text-dim); }
-    .email-input:focus { border-color: rgba(124,58,237,0.55); }
-    .or-row {
-      font-size: 13px;
-      color: var(--text-dim);
-      margin: 18px 0;
-      position: relative;
-    }
+    .cta-box p { font-size: 17px; color: var(--text-muted); margin-bottom: 40px; position: relative; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
     /* ─── Footer ─────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 44px 40px;
-    }
-    .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .footer-links {
-      display: flex;
-      gap: 26px;
-      list-style: none;
-      flex-wrap: wrap;
-    }
-    .footer-links a {
-      font-size: 13.5px;
-      color: var(--text-dim);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
+    footer { border-top: 1px solid var(--border); padding: 44px 40px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-links { display: flex; gap: 26px; list-style: none; flex-wrap: wrap; }
+    .footer-links a { font-size: 13.5px; color: var(--text-dim); text-decoration: none; transition: color 0.15s; }
     .footer-links a:hover { color: var(--text-muted); }
-    .footer-copy {
-      font-size: 13px;
-      color: var(--text-dim);
-    }
+    .footer-copy { font-size: 13px; color: var(--text-dim); }
 
-    /* ─── Floating Chat ──────────────────────────────────── */
-    .chat-fab {
-      position: fixed;
-      bottom: 30px; right: 30px;
-      z-index: 300;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-    }
-    .chat-tooltip {
-      background: var(--bg-card);
-      border: 1px solid var(--border-hover);
-      border-radius: 10px;
-      padding: 10px 16px;
-      font-size: 13px;
-      color: var(--text);
-      white-space: nowrap;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: all 0.2s;
-      pointer-events: none;
-    }
-    .chat-fab:hover .chat-tooltip {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .chat-btn {
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      background: var(--grad);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 8px 32px rgba(124,58,237,0.45);
-      transition: transform 0.2s;
-    }
+    /* ─── Chat Bubble ────────────────────────────────────── */
+    .chat-fab { position: fixed; bottom: 30px; right: 30px; z-index: 300; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+    .chat-tooltip { background: var(--bg-card); border: 1px solid var(--border-hover); border-radius: 10px; padding: 10px 16px; font-size: 13px; color: var(--text); white-space: nowrap; opacity: 0; transform: translateY(4px); transition: all 0.2s; pointer-events: none; }
+    .chat-fab:hover .chat-tooltip { opacity: 1; transform: translateY(0); }
+    .chat-btn { width: 56px; height: 56px; border-radius: 50%; background: var(--grad); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 8px 32px rgba(124,58,237,0.45); transition: transform 0.2s; }
     .chat-btn:hover { transform: scale(1.1); }
 
     /* ─── Mobile ─────────────────────────────────────────── */
@@ -691,30 +217,18 @@
       nav { padding: 0 24px; }
       .nav-links, .nav-cta-desktop { display: none; }
       .hamburger { display: flex; }
-
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 36px;
-        padding: 0;
-      }
-      .hero-visual { height: 260px; order: -1; }
-      .avatar-disc { width: 180px; height: 180px; }
-      .orbit-1 { width: 230px; height: 230px; }
-      .orbit-2 { width: 280px; height: 280px; }
-      .hero-badge { display: none; }
-
-      .trust-bar { gap: 28px; padding: 20px 24px; }
-
-      .why-grid { grid-template-columns: 1fr; gap: 48px; }
-      .tech-grid { grid-template-columns: 1fr 1fr; }
-      .learn-grid { grid-template-columns: 1fr; }
-
-      section { padding: 72px 0; }
       .container { padding: 0 24px; }
-
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .venn-wrap { height: 300px; order: -1; }
+      .venn { width: 240px; height: 180px; }
+      .venn-circle { width: 165px; height: 165px; }
+      .venn-intersection { width: 72px; height: 112px; }
+      .question-grid { grid-template-columns: 1fr; gap: 48px; }
+      .tech-grid { grid-template-columns: 1fr 1fr; }
+      .expert-grid { grid-template-columns: 1fr; gap: 40px; }
+      .expert-photo { max-width: 100%; aspect-ratio: 4/3; }
       .cta-box { padding: 56px 24px; }
-      .email-row { flex-direction: column; }
-
+      section { padding: 72px 0; }
       footer { padding: 36px 24px; }
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
     }
@@ -732,25 +246,20 @@
       <circle cx="9" cy="9" r="9" fill="url(#nlg1)" fill-opacity="0.9"/>
       <circle cx="19" cy="9" r="9" fill="url(#nlg2)" fill-opacity="0.75"/>
       <defs>
-        <linearGradient id="nlg1" x1="0" y1="0" x2="18" y2="18" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/>
-        </linearGradient>
-        <linearGradient id="nlg2" x1="10" y1="0" x2="28" y2="18" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/>
-        </linearGradient>
+        <linearGradient id="nlg1" x1="0" y1="0" x2="18" y2="18" gradientUnits="userSpaceOnUse"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
+        <linearGradient id="nlg2" x1="10" y1="0" x2="28" y2="18" gradientUnits="userSpaceOnUse"><stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/></linearGradient>
       </defs>
     </svg>
-    AI <span class="nav-x">×</span> Humanity
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">AI <span class="nav-x">×</span> Humanity</span>
+      <span class="nav-by">by Videospace</span>
+    </div>
   </a>
   <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
     <li><a href="tech-lab.html">Tech Lab</a></li>
-    <li><a href="learn.html">Learn</a></li>
   </ul>
-  <a href="#" class="btn btn-primary nav-cta-desktop">Try AI Twin →</a>
-  <button class="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <a href="tech-lab.html" class="btn btn-primary nav-cta-desktop">Experience Now →</a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 
@@ -761,34 +270,32 @@
   <div class="container">
     <div class="hero-inner">
 
-      <div class="hero-content">
-        <div class="label">Future of Learning</div>
-        <h1>Where AI Meets<br><span class="gradient-text">Humanity</span></h1>
+      <div>
+        <div class="hero-eyebrow">Videospace · A live investigation</div>
+        <h1><span class="gradient-text">Alpha</span><br>or<br><span style="color:var(--text-muted)">Omega?</span></h1>
         <p class="hero-sub">
-          [Name] explores how artificial intelligence is reshaping education,
-          human connection, and what it means to learn in the 21st century.
+          AI is being shaped — right now, by decisions made in real time.
+          This is Videospace's live investigation into what it means to shape it well.
         </p>
         <div class="hero-ctas">
-          <a href="#" class="btn btn-primary btn-lg">Meet My AI Twin →</a>
-          <a href="#" class="btn btn-ghost btn-lg">Watch the Podcast</a>
+          <a href="tech-lab.html" class="btn btn-primary btn-lg">Experience the Tech →</a>
+          <a href="#what" class="btn btn-outline btn-lg">What is AI × Humanity?</a>
         </div>
       </div>
 
-      <div class="hero-visual">
-        <div class="avatar-shell">
-          <div class="orbit orbit-2"><div class="orbit-dot"></div></div>
-          <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
-          <div class="avatar-disc">
-            <div class="avatar-label">
-              <strong>AI Twin</strong>
-              [Name]'s 3D Avatar<br>will live here
-            </div>
+      <div class="venn-wrap">
+        <div class="venn">
+          <div class="venn-circle venn-ai">AI</div>
+          <div class="venn-circle venn-human">Human</div>
+          <div class="venn-intersection">
+            <div class="venn-x">×</div>
+            <div class="venn-caption">The future</div>
           </div>
         </div>
-        <div class="hero-badge">
-          <div class="hero-badge-dot"></div>
-          AI Twin is live — try it now
-        </div>
+        <div class="venn-badge vb-1">🧠 Intelligent</div>
+        <div class="venn-badge vb-2">❤️ Human</div>
+        <div class="venn-badge vb-3">🌍 Accessible</div>
+        <div class="venn-badge vb-4">🔓 Open</div>
       </div>
 
     </div>
@@ -796,167 +303,173 @@
 </div>
 
 
-<!-- ── TRUST BAR ──────────────────────────────────────── -->
-<div class="trust-bar">
-  <span class="trust-eyebrow">Featured at</span>
-  <div class="trust-divider"></div>
-  <span class="trust-item">[University / Institution]</span>
-  <span class="trust-item">[Conference Name]</span>
-  <span class="trust-item">[Media Outlet]</span>
-  <span class="trust-item">[Organisation]</span>
-  <span class="trust-item">[Publication]</span>
-</div>
-
-
-<!-- ── WHY THIS MATTERS ───────────────────────────────── -->
-<section>
+<!-- ── WHAT IS AI × HUMANITY ─────────────────────────────── -->
+<section id="what" class="question-section">
   <div class="container">
-    <div class="why-grid">
+    <div class="question-grid">
+
       <div>
-        <div class="why-stat-number">1.3B</div>
-        <div class="why-stat-desc">students whose learning<br>AI will fundamentally change</div>
+        <div class="label">The Question</div>
+        <div class="big-question">
+          <span class="gradient-text">Alpha</span>
+          <span class="question-or">or</span>
+          <span style="color:var(--text-muted);">Omega?</span>
+        </div>
+        <p style="font-size:16px; color:var(--text-dim); margin-top:20px; line-height:1.7;">
+          From the book: <em>AI and Humanity: Alpha or Omega?<br>Shaping Our Destiny in the Age of AI</em>
+        </p>
       </div>
+
       <div>
-        <div class="label">Why This Matters</div>
-        <h2 style="margin-bottom: 24px;">We are at an inflection point.</h2>
-        <div class="why-body">
+        <div class="label">The Vision</div>
+        <div class="question-body">
           <p>
-            Artificial intelligence isn't a distant future — it's already in classrooms,
-            boardrooms, and living rooms. But most people don't know what to make of it.
+            AI × Humanity is not a tagline. It is a position: that the relationship between
+            artificial intelligence and the people it affects is not inevitable — it is designed.
           </p>
           <p>
-            [Name] bridges the gap between cutting-edge technology and the humans it
-            affects — making the complex clear, and the abstract actionable.
+            The question is whether we design it consciously, or let it design us.
+            Videospace was built to demonstrate — not just argue — what conscious design looks like.
           </p>
         </div>
-        <a href="#" class="btn btn-outline" style="margin-top: 32px;">Read [Name]'s Story →</a>
+        <ul class="idea-list">
+          <li class="idea-item">
+            <div class="idea-icon">🔬</div>
+            <div>
+              <h3>Show, don't tell</h3>
+              <p>Every concept here is live and interactive. Experience the technology before forming an opinion of it.</p>
+            </div>
+          </li>
+          <li class="idea-item">
+            <div class="idea-icon">🤝</div>
+            <div>
+              <h3>AI amplifies, not replaces</h3>
+              <p>The tools on this site extend a human — their voice, their knowledge, their reach. The human remains the source.</p>
+            </div>
+          </li>
+          <li class="idea-item">
+            <div class="idea-icon">🌐</div>
+            <div>
+              <h3>Knowledge without borders</h3>
+              <p>The future of learning is not about access to content. It's about access to genuine expertise, at any scale, in any language.</p>
+            </div>
+          </li>
+        </ul>
       </div>
+
     </div>
   </div>
 </section>
 
 
-<!-- ── TECH STRIP ─────────────────────────────────────── -->
-<section style="padding-top: 0;">
+<!-- ── TECH PREVIEW ───────────────────────────────────────── -->
+<section class="tech-preview">
   <div class="container">
-    <div class="tech-header">
-      <div>
-        <div class="label">Tech Lab</div>
-        <h2>Experience the Technology</h2>
-      </div>
-      <a href="#" class="btn btn-outline">Explore All →</a>
+    <div class="tech-preview-header">
+      <div class="label" style="justify-content:center;">The Demonstration</div>
+      <h2>Four technologies.<br>One argument.</h2>
+      <p>Each one is a working proof of what AI and humanity look like when they work together.</p>
     </div>
     <div class="tech-grid">
-      <a href="#" class="tech-card">
-        <div class="tech-icon">🧬</div>
-        <h3>3D AI Twin</h3>
-        <p>Interact with [Name]'s digital twin — a real-time 3D avatar powered by AI.</p>
-        <span class="tech-link">Try it →</span>
+      <a href="tech-lab.html#videogen" class="tech-card">
+        <div class="tc-number">01</div>
+        <div class="tc-icon">🎬</div>
+        <div class="tc-concept">Video Generation</div>
+        <div class="tc-title">The Story</div>
+        <div class="tc-desc">AI creates video of a digital presenter from a script. One voice, any language, at unlimited scale.</div>
+        <span class="tc-link">Experience it →</span>
       </a>
-      <a href="#" class="tech-card">
-        <div class="tech-icon">💬</div>
-        <h3>AI Chatbot</h3>
-        <p>Ask anything, by voice or text. [Name]'s AI responds the way he would.</p>
-        <span class="tech-link">Start chatting →</span>
+      <a href="tech-lab.html#search" class="tech-card">
+        <div class="tc-number">02</div>
+        <div class="tc-icon">🔍</div>
+        <div class="tc-concept">Video Search</div>
+        <div class="tc-title">The Memory</div>
+        <div class="tc-desc">Ask a question in plain language. Find the exact moment in hours of video where it's answered.</div>
+        <span class="tc-link">Experience it →</span>
       </a>
-      <a href="#" class="tech-card">
-        <div class="tech-icon">🎬</div>
-        <h3>Video Generation</h3>
-        <p>See how AI creates photorealistic video with a digital human presenter.</p>
-        <span class="tech-link">Watch demo →</span>
+      <a href="tech-lab.html#avatar" class="tech-card">
+        <div class="tc-number">03</div>
+        <div class="tc-icon">🧬</div>
+        <div class="tc-concept">3D Avatar</div>
+        <div class="tc-title">The Presence</div>
+        <div class="tc-desc">A digital twin — a real person's face, voice, and expressions — that responds in real time.</div>
+        <span class="tc-link">Experience it →</span>
       </a>
-      <a href="#" class="tech-card">
-        <div class="tech-icon">🔍</div>
-        <h3>Video Search</h3>
-        <p>Search hours of content by topic or question — not just keyword matching.</p>
-        <span class="tech-link">Search now →</span>
+      <a href="tech-lab.html#chatbot" class="tech-card">
+        <div class="tc-number">04</div>
+        <div class="tc-icon">💬</div>
+        <div class="tc-concept">AI Chatbot</div>
+        <div class="tc-title">The Dialogue</div>
+        <div class="tc-desc">An AI trained on a person's knowledge. Have a real conversation with their expertise, any time.</div>
+        <span class="tc-link">Experience it →</span>
       </a>
     </div>
   </div>
 </section>
 
 
-<!-- ── QUOTE ──────────────────────────────────────────── -->
-<section>
+<!-- ── THE EXPERT ─────────────────────────────────────────── -->
+<section class="expert-section">
   <div class="container">
-    <div class="quote-wrap">
-      <span class="quote-mark">"</span>
-      <blockquote>
-        The question isn't whether AI will change how we learn.
-        It's whether we'll be ready to
-        <span class="gradient-text">shape that change</span> — or simply be shaped by it.
-      </blockquote>
-      <div class="quote-attr">— <strong>[Name]</strong>, [Title / Role]</div>
-    </div>
-  </div>
-</section>
+    <div class="expert-grid">
 
-
-<!-- ── LEARN PREVIEW ──────────────────────────────────── -->
-<section style="padding-top: 0;">
-  <div class="container">
-    <div class="learn-header">
-      <div>
-        <div class="label">Learn</div>
-        <h2>Go Deeper</h2>
+      <div class="expert-photo">
+        <span class="expert-photo-label">[ Photo of [Name] ]</span>
       </div>
-      <a href="#" class="btn btn-outline">All Content →</a>
-    </div>
-    <div class="learn-grid">
-      <a href="#" class="learn-card">
-        <div class="learn-thumb learn-thumb-podcast">
-          <span class="learn-thumb-badge">Podcast</span>
-          🎙️
+
+      <div>
+        <div class="label">The Mind Behind It</div>
+        <div class="expert-name">[Name]</div>
+        <div class="expert-title">[Title / Role — e.g. AI Strategist & Educator]</div>
+        <p class="expert-bio">
+          [Name] has spent [X] years at the intersection of artificial intelligence and human learning.
+          The AI × Humanity project — the podcast, the book, and this site — is [his/her/their]
+          ongoing investigation into the most consequential relationship of our time.
+        </p>
+
+        <div class="content-cards">
+          <a href="https://youtube.com/playlist?list=PLbXgTi79jSSYXAEDVQWSCwgsC6CGgVaLy" target="_blank" rel="noopener" class="content-card">
+            <div class="content-card-icon cc-podcast">🎙</div>
+            <div class="content-card-text">
+              <div class="cc-type">Podcast · YouTube</div>
+              <div class="cc-title">AI × Humanity — The Series</div>
+              <div class="cc-meta">Watch the full playlist →</div>
+            </div>
+            <div class="cc-arrow">↗</div>
+          </a>
+          <a href="#" class="content-card">
+            <div class="content-card-icon cc-book">📖</div>
+            <div class="content-card-text">
+              <div class="cc-type">Book</div>
+              <div class="cc-title">AI and Humanity: Alpha or Omega?<br>Shaping Our Destiny in the Age of AI</div>
+              <div class="cc-meta">by [Name]</div>
+            </div>
+            <div class="cc-arrow">↗</div>
+          </a>
         </div>
-        <div class="learn-card-body">
-          <h3>AI & Humanity — The Series</h3>
-          <p>Long-form conversations on AI, education, and the future of learning. [X] episodes available.</p>
-        </div>
-      </a>
-      <a href="#" class="learn-card">
-        <div class="learn-thumb learn-thumb-ebook">
-          <span class="learn-thumb-badge">E-Book</span>
-          📖
-        </div>
-        <div class="learn-card-body">
-          <h3>[E-Book Title — Placeholder]</h3>
-          <p>A practical guide to AI's role in the future of learning. Free download with email.</p>
-        </div>
-      </a>
-      <a href="#" class="learn-card">
-        <div class="learn-thumb learn-thumb-library">
-          <span class="learn-thumb-badge">Library</span>
-          🎥
-        </div>
-        <div class="learn-card-body">
-          <h3>Slides & Sessions</h3>
-          <p>Talks, keynotes, and Notebook LM videos — searchable by topic or question.</p>
-        </div>
-      </a>
+      </div>
+
     </div>
   </div>
 </section>
 
 
-<!-- ── FINAL CTA ──────────────────────────────────────── -->
-<section>
+<!-- ── CLOSING CTA ────────────────────────────────────────── -->
+<section class="closing-cta">
   <div class="container">
     <div class="cta-box">
-      <div class="label" style="justify-content: center;">Stay in the Loop</div>
-      <h2>The future of learning<br>lands in your inbox.</h2>
-      <p class="sub">Insights on AI and education from [Name], directly.</p>
-      <div class="email-row">
-        <input type="email" class="email-input" placeholder="your@email.com">
-        <button class="btn btn-primary">Subscribe</button>
+      <div class="label" style="justify-content:center;">Don't just read about it</div>
+      <h2>The argument is live.<br><span class="gradient-text">Experience it.</span></h2>
+      <p>Four AI technologies, built to show what the future of learning looks like when humanity stays in the room.</p>
+      <div class="cta-btns">
+        <a href="tech-lab.html" class="btn btn-primary btn-lg">Enter the Tech Lab →</a>
       </div>
-      <div class="or-row">or</div>
-      <a href="#" class="btn btn-outline btn-lg">Talk to the AI Twin →</a>
     </div>
   </div>
 </section>
 
 
-<!-- ── FOOTER ─────────────────────────────────────────── -->
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
 <footer>
   <div class="footer-inner">
     <a href="index.html" class="nav-logo">
@@ -964,33 +477,30 @@
         <circle cx="9" cy="9" r="9" fill="url(#flg1)" fill-opacity="0.9"/>
         <circle cx="19" cy="9" r="9" fill="url(#flg2)" fill-opacity="0.75"/>
         <defs>
-          <linearGradient id="flg1" x1="0" y1="0" x2="18" y2="18" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/>
-          </linearGradient>
-          <linearGradient id="flg2" x1="10" y1="0" x2="28" y2="18" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/>
-          </linearGradient>
+          <linearGradient id="flg1" x1="0" y1="0" x2="18" y2="18" gradientUnits="userSpaceOnUse"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
+          <linearGradient id="flg2" x1="10" y1="0" x2="28" y2="18" gradientUnits="userSpaceOnUse"><stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/></linearGradient>
         </defs>
       </svg>
-      AI <span class="nav-x">×</span> Humanity
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">AI <span class="nav-x">×</span> Humanity</span>
+        <span class="nav-by">by Videospace</span>
+      </div>
     </a>
     <ul class="footer-links">
-      <li><a href="about.html">About</a></li>
       <li><a href="tech-lab.html">Tech Lab</a></li>
-      <li><a href="learn.html">Learn</a></li>
-        <li><a href="#">Privacy</a></li>
+      <li><a href="https://youtube.com/playlist?list=PLbXgTi79jSSYXAEDVQWSCwgsC6CGgVaLy" target="_blank" rel="noopener">Podcast</a></li>
+      <li><a href="#">Book</a></li>
+      <li><a href="#">Privacy</a></li>
     </ul>
-    <span class="footer-copy">© 2025 [Name]. All rights reserved.</span>
+    <span class="footer-copy">© 2025 Videospace. All rights reserved.</span>
   </div>
 </footer>
 
-
-<!-- ── FLOATING CHAT ──────────────────────────────────── -->
+<!-- ── CHAT BUBBLE ────────────────────────────────────────── -->
 <div class="chat-fab">
-  <div class="chat-tooltip">Chat with [Name]'s AI</div>
+  <div class="chat-tooltip">Ask the AI Twin</div>
   <button class="chat-btn" aria-label="Open AI chat">💬</button>
 </div>
 
 </body>
 </html>
-```
