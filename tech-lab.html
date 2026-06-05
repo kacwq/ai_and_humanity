@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Lab — AI × Humanity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Tokens ─────────────────────────────────────────── */
+    :root {
+      --bg:            #080810;
+      --bg-card:       #10101A;
+      --bg-card-hover: #15152A;
+      --border:        rgba(255,255,255,0.07);
+      --border-hover:  rgba(255,255,255,0.15);
+      --text:          #FFFFFF;
+      --text-muted:    #8888A0;
+      --text-dim:      #44445A;
+      --accent:        #7C3AED;
+      --accent-light:  #A78BFA;
+      --grad:          linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
+      --grad-text:     linear-gradient(135deg, #A78BFA, #F472B6);
+      --radius:        12px;
+      --radius-lg:     20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── Type ───────────────────────────────────────────── */
+    h1 { font-size: clamp(40px, 6vw, 72px); font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; }
+    h2 { font-size: clamp(28px, 3.5vw, 46px); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+    h3 { font-size: 19px; font-weight: 700; }
+    .gradient-text {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent-light); margin-bottom: 18px;
+    }
+    .label::before {
+      content: ''; display: block; width: 16px; height: 2px;
+      background: var(--accent-light); border-radius: 2px;
+    }
+
+    /* ─── Buttons ────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 22px; border-radius: 9px; font-size: 14px;
+      font-weight: 600; cursor: pointer; text-decoration: none;
+      transition: all 0.2s ease; border: none; font-family: inherit;
+    }
+    .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 4px 24px rgba(124,58,237,0.35); }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-outline { border: 1px solid var(--border-hover); color: var(--text); background: rgba(255,255,255,0.03); }
+    .btn-outline:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.25); }
+    .btn-lg { padding: 15px 30px; font-size: 16px; border-radius: 11px; }
+
+    /* ─── Layout ─────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+    /* ─── Nav ────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 0 40px; height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,8,16,0.75);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 17px; font-weight: 700; color: var(--text);
+      text-decoration: none; letter-spacing: -0.01em;
+    }
+    .nav-logo-mark { flex-shrink: 0; display: block; }
+    .nav-x {
+      background: var(--grad-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; font-weight: 300; margin: 0 1px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-muted); border-radius: 2px; }
+
+    /* ─── Sticky Feature Nav ─────────────────────────────── */
+    .feature-nav {
+      position: sticky; top: 68px; z-index: 100;
+      background: rgba(8,8,16,0.9); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border); padding: 0 40px;
+    }
+    .feature-nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; gap: 0; overflow-x: auto; scrollbar-width: none;
+    }
+    .feature-nav-inner::-webkit-scrollbar { display: none; }
+    .fnav-item {
+      padding: 14px 22px; font-size: 13px; font-weight: 500;
+      color: var(--text-dim); text-decoration: none;
+      border-bottom: 2px solid transparent; transition: all 0.15s;
+      white-space: nowrap; display: flex; align-items: center; gap: 8px;
+    }
+    .fnav-item:hover { color: var(--text-muted); }
+    .fnav-item.active { color: var(--text); border-bottom-color: var(--accent-light); }
+    .fnav-num {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: var(--text-dim);
+      transition: all 0.15s;
+    }
+    .fnav-item.active .fnav-num {
+      background: rgba(124,58,237,0.2); border-color: var(--accent-light);
+      color: var(--accent-light);
+    }
+
+    /* ─── Hero ───────────────────────────────────────────── */
+    .hero {
+      padding-top: calc(68px + 49px);
+      padding-bottom: 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: -100px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(124,58,237,0.14) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      padding-top: 60px;
+    }
+    .hero-sub { font-size: 18px; color: var(--text-muted); line-height: 1.75; margin-top: 20px; max-width: 560px; }
+
+    /* 4-card preview strip */
+    .feature-cards {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; margin-top: 56px;
+    }
+    .feature-card-link {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 24px 20px;
+      text-decoration: none; color: var(--text);
+      transition: all 0.2s; display: block; position: relative; overflow: hidden;
+    }
+    .feature-card-link::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--grad); opacity: 0; transition: opacity 0.2s;
+    }
+    .feature-card-link:hover { background: var(--bg-card-hover); border-color: var(--border-hover); transform: translateY(-4px); }
+    .feature-card-link:hover::before { opacity: 1; }
+    .fc-num { font-size: 11px; font-weight: 700; color: var(--text-dim); letter-spacing: 0.08em; margin-bottom: 14px; }
+    .fc-icon { font-size: 28px; margin-bottom: 12px; }
+    .fc-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .fc-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+    .fc-arrow { font-size: 13px; color: var(--accent-light); margin-top: 16px; font-weight: 600; display: block; }
+
+    /* ─── Tech Sections ──────────────────────────────────── */
+    .tech-section {
+      padding: 120px 0;
+      position: relative; overflow: hidden;
+      border-top: 1px solid var(--border);
+    }
+    .tech-section:nth-child(even) { background: rgba(255,255,255,0.012); }
+
+    .tech-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .tech-grid.reverse { direction: rtl; }
+    .tech-grid.reverse > * { direction: ltr; }
+
+    .section-num {
+      position: absolute; top: 60px; right: 40px;
+      font-size: 160px; font-weight: 900; line-height: 1;
+      color: rgba(255,255,255,0.02); letter-spacing: -0.05em;
+      pointer-events: none; user-select: none;
+    }
+
+    /* Content side */
+    .tech-content { position: relative; z-index: 1; }
+    .tech-body { font-size: 16px; color: var(--text-muted); line-height: 1.85; margin: 20px 0 28px; }
+    .tech-body p + p { margin-top: 14px; }
+
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+    .feature-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 15px; color: var(--text-muted);
+    }
+    .feature-list li::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-light); flex-shrink: 0; margin-top: 8px;
+    }
+
+    /* How it works accordion */
+    .accordion {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; margin-top: 24px;
+    }
+    .accordion-trigger {
+      width: 100%; padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.03); border: none;
+      font-family: inherit; font-size: 13px; font-weight: 600;
+      color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+      text-align: left;
+    }
+    .accordion-trigger:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .accordion-arrow { transition: transform 0.2s; font-size: 11px; }
+    .accordion-trigger.open { color: var(--text); }
+    .accordion-trigger.open .accordion-arrow { transform: rotate(180deg); }
+    .accordion-body {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+    }
+    .accordion-body-inner {
+      padding: 16px 20px; font-size: 13.5px; color: var(--text-muted);
+      line-height: 1.75; border-top: 1px solid var(--border);
+    }
+    .accordion-body-inner ol { padding-left: 18px; }
+    .accordion-body-inner ol li { margin-bottom: 8px; }
+
+    .tech-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ─── Visual Mockups ─────────────────────────────────── */
+    .mockup-wrap {
+      position: relative; display: flex;
+      align-items: center; justify-content: center;
+    }
+
+    /* 01 — Avatar */
+    .avatar-stage {
+      width: 100%; aspect-ratio: 1;
+      max-width: 460px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .av-orbit { position: absolute; border-radius: 50%; border: 1px solid var(--border); }
+    .av-orbit-1 { width: 70%; height: 70%; animation: spin 22s linear infinite; }
+    .av-orbit-2 { width: 86%; height: 86%; animation: spin 34s linear infinite reverse; border-style: dashed; opacity: 0.4; }
+    .av-orbit-3 { width: 100%; height: 100%; animation: spin 48s linear infinite; opacity: 0.25; }
+    .av-orbit-dot {
+      position: absolute; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-light); top: -4px; left: 50%;
+      transform: translateX(-50%); box-shadow: 0 0 12px var(--accent-light);
+    }
+    .av-disc {
+      width: 52%; height: 52%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 32%, rgba(124,58,237,0.5), rgba(236,72,153,0.2) 60%, transparent 80%);
+      border: 1px solid rgba(124,58,237,0.3);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .av-disc::after {
+      content: ''; position: absolute; inset: -20px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+      animation: breathe 3.5s ease-in-out infinite;
+    }
+    @keyframes breathe { 0%,100%{opacity:.5;transform:scale(1)} 50%{opacity:1;transform:scale(1.07)} }
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .av-label { text-align: center; font-size: 12px; color: var(--text-muted); }
+    .av-label strong { display: block; font-size: 13px; color: var(--accent-light); margin-bottom: 4px; }
+
+    /* Floating tags around avatar */
+    .av-tag {
+      position: absolute; background: var(--bg-card);
+      border: 1px solid var(--border-hover); border-radius: 8px;
+      padding: 8px 14px; font-size: 12px; font-weight: 600;
+      color: var(--text-muted); white-space: nowrap;
+      animation: float 4s ease-in-out infinite;
+    }
+    .av-tag-1 { top: 12%; left: 0; animation-delay: 0s; }
+    .av-tag-2 { top: 50%; right: 0; animation-delay: 1.2s; transform: translateY(-50%); }
+    .av-tag-3 { bottom: 12%; left: 8%; animation-delay: 0.6s; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+    .av-tag-2 { animation: float2 4s ease-in-out infinite 1.2s; }
+    @keyframes float2 { 0%,100%{transform:translateY(-50%)} 50%{transform:translateY(calc(-50% - 7px))} }
+
+    /* 02 — Chat mockup */
+    .chat-mockup {
+      width: 100%; max-width: 460px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+    }
+    .chat-header {
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.02);
+    }
+    .chat-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--grad); display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; flex-shrink: 0;
+    }
+    .chat-name { font-size: 14px; font-weight: 600; }
+    .chat-status { font-size: 12px; color: var(--text-dim); display: flex; align-items: center; gap: 5px; }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; flex-shrink: 0; }
+    .chat-mode-toggle {
+      margin-left: auto; display: flex; gap: 4px;
+      background: rgba(255,255,255,0.05); border-radius: 7px; padding: 3px;
+    }
+    .mode-btn {
+      padding: 4px 10px; border-radius: 5px; font-size: 11px; font-weight: 600;
+      color: var(--text-dim); cursor: pointer; transition: all 0.15s;
+      border: none; background: none; font-family: inherit;
+    }
+    .mode-btn.active { background: var(--bg-card); color: var(--text); }
+    .chat-messages { padding: 20px; display: flex; flex-direction: column; gap: 16px; min-height: 260px; }
+    .chat-msg { display: flex; gap: 10px; max-width: 85%; }
+    .chat-msg.user { margin-left: auto; flex-direction: row-reverse; }
+    .msg-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+    }
+    .msg-avatar.ai { background: var(--grad); }
+    .msg-avatar.human { background: rgba(255,255,255,0.1); color: var(--text-muted); }
+    .msg-bubble {
+      padding: 10px 14px; border-radius: 14px;
+      font-size: 13.5px; line-height: 1.55;
+    }
+    .chat-msg.ai .msg-bubble { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-top-left-radius: 4px; }
+    .chat-msg.user .msg-bubble { background: rgba(124,58,237,0.25); border: 1px solid rgba(124,58,237,0.3); border-top-right-radius: 4px; color: #e0d8ff; }
+    .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 6px 2px; }
+    .typing-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--text-dim); animation: blink 1.2s infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink { 0%,100%{opacity:0.3} 50%{opacity:1} }
+    .chat-input-bar {
+      padding: 14px 16px; border-top: 1px solid var(--border);
+      display: flex; gap: 10px; align-items: center;
+    }
+    .chat-input {
+      flex: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      border-radius: 8px; padding: 9px 14px; font-size: 13px;
+      color: var(--text-muted); font-family: inherit; outline: none;
+    }
+    .chat-send {
+      width: 36px; height: 36px; border-radius: 8px; border: none;
+      background: var(--grad); cursor: pointer; display: flex;
+      align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
+    }
+    .chat-mic {
+      width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03); cursor: pointer; display: flex;
+      align-items: center; justify-content: center; font-size: 14px;
+      color: var(--text-muted); flex-shrink: 0;
+    }
+    .sample-qs {
+      padding: 0 16px 16px; display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .sample-q {
+      padding: 5px 12px; border-radius: 100px; font-size: 12px; font-weight: 500;
+      border: 1px solid var(--border); color: var(--text-muted);
+      cursor: pointer; transition: all 0.15s; background: none;
+      font-family: inherit;
+    }
+    .sample-q:hover { border-color: var(--accent-light); color: var(--accent-light); }
+
+    /* 03 — Video Gen mockup */
+    .videogen-mockup { width: 100%; max-width: 460px; }
+    .video-player {
+      background: #000; border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden; position: relative;
+      aspect-ratio: 16/9;
+    }
+    .video-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(124,58,237,0.25) 0%, rgba(8,8,16,0.95) 65%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .video-presenter {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, rgba(124,58,237,0.6), rgba(236,72,153,0.2) 60%, transparent);
+      border: 1px solid rgba(124,58,237,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--text-muted); text-align: center;
+    }
+    .video-play-btn {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; cursor: pointer; transition: all 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .video-play-btn:hover { background: rgba(124,58,237,0.4); transform: translate(-50%,-50%) scale(1.08); }
+    .video-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.12); border-radius: 6px;
+      padding: 4px 10px; font-size: 11px; font-weight: 700;
+      color: var(--accent-light); letter-spacing: 0.06em;
+    }
+    .video-controls {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 10px 14px; background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      display: flex; align-items: center; gap: 10px;
+    }
+    .video-progress { flex: 1; height: 3px; background: rgba(255,255,255,0.2); border-radius: 2px; }
+    .video-progress-fill { width: 30%; height: 100%; background: var(--grad); border-radius: 2px; }
+    .video-time { font-size: 11px; color: rgba(255,255,255,0.5); }
+
+    /* Pipeline diagram */
+    .pipeline {
+      display: flex; align-items: center; gap: 0;
+      margin-top: 16px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .pipe-step {
+      flex: 1; padding: 14px 12px; text-align: center;
+      position: relative;
+    }
+    .pipe-step + .pipe-step::before {
+      content: '→'; position: absolute; left: -1px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim); font-size: 13px;
+    }
+    .pipe-icon { font-size: 20px; margin-bottom: 4px; }
+    .pipe-label { font-size: 11px; color: var(--text-dim); font-weight: 600; }
+
+    /* 04 — Video Search mockup */
+    .search-mockup { width: 100%; max-width: 460px; }
+    .search-bar-wrap {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--bg-card); border: 1px solid var(--border-hover);
+      border-radius: var(--radius); padding: 12px 16px; margin-bottom: 16px;
+    }
+    .search-icon { font-size: 16px; color: var(--text-dim); flex-shrink: 0; }
+    .search-query { font-size: 14px; color: var(--text-muted); flex: 1; }
+    .search-query strong { color: var(--text); }
+    .search-clear { font-size: 12px; color: var(--text-dim); flex-shrink: 0; }
+    .search-results { display: flex; flex-direction: column; gap: 10px; }
+    .result-card {
+      display: flex; gap: 12px; align-items: center;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 12px 14px;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .result-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
+    .result-thumb {
+      width: 72px; height: 48px; border-radius: 6px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; position: relative;
+    }
+    .rt-1 { background: linear-gradient(135deg, #1a1533, #0f0f23); }
+    .rt-2 { background: linear-gradient(135deg, #0d1b2a, #1a1533); }
+    .rt-3 { background: linear-gradient(135deg, #120a26, #0f0f23); }
+    .result-info { flex: 1; min-width: 0; }
+    .result-ep { font-size: 11px; color: var(--accent-light); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 3px; }
+    .result-title { font-size: 13.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .result-meta { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+    .result-timestamp {
+      background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.25);
+      border-radius: 5px; padding: 3px 8px; font-size: 11px;
+      color: var(--accent-light); font-weight: 600; white-space: nowrap; flex-shrink: 0;
+    }
+    .search-hint {
+      text-align: center; font-size: 12px; color: var(--text-dim);
+      margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+    }
+
+    /* ─── Bottom CTA ─────────────────────────────────────── */
+    .bottom-cta {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+    .cta-box {
+      background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1), rgba(236,72,153,0.07));
+      border: 1px solid rgba(124,58,237,0.22); border-radius: 24px;
+      padding: 80px 60px; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-box::before {
+      content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(124,58,237,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-box h2 { margin-bottom: 14px; position: relative; }
+    .cta-box p { font-size: 17px; color: var(--text-muted); margin-bottom: 40px; position: relative; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── Footer ─────────────────────────────────────────── */
+    footer { border-top: 1px solid var(--border); padding: 44px 40px; }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-links { display: flex; gap: 26px; list-style: none; flex-wrap: wrap; }
+    .footer-links a { font-size: 13.5px; color: var(--text-dim); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--text-muted); }
+    .footer-copy { font-size: 13px; color: var(--text-dim); }
+
+    /* ─── Chat Bubble ────────────────────────────────────── */
+    .chat-fab {
+      position: fixed; bottom: 30px; right: 30px; z-index: 300;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+    }
+    .chat-tooltip {
+      background: var(--bg-card); border: 1px solid var(--border-hover);
+      border-radius: 10px; padding: 10px 16px; font-size: 13px; color: var(--text);
+      white-space: nowrap; opacity: 0; transform: translateY(4px);
+      transition: all 0.2s; pointer-events: none;
+    }
+    .chat-fab:hover .chat-tooltip { opacity: 1; transform: translateY(0); }
+    .chat-btn {
+      width: 56px; height: 56px; border-radius: 50%; background: var(--grad);
+      border: none; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; font-size: 22px;
+      box-shadow: 0 8px 32px rgba(124,58,237,0.45); transition: transform 0.2s;
+    }
+    .chat-btn:hover { transform: scale(1.1); }
+
+    /* ─── Mobile ─────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
+      .nav-links, .nav-cta-desktop { display: none; }
+      .hamburger { display: flex; }
+      .feature-nav { padding: 0 24px; }
+      .container { padding: 0 24px; }
+
+      .feature-cards { grid-template-columns: 1fr 1fr; }
+      .tech-grid, .tech-grid.reverse { grid-template-columns: 1fr; direction: ltr; gap: 48px; }
+      .mockup-wrap { order: -1; }
+      .avatar-stage, .chat-mockup, .videogen-mockup, .search-mockup { max-width: 100%; }
+      .section-num { font-size: 100px; top: 20px; right: 20px; }
+
+      .cta-box { padding: 56px 24px; }
+      footer { padding: 36px 24px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+    @media (max-width: 600px) {
+      .feature-cards { grid-template-columns: 1fr; }
+      .tech-ctas { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-mark" width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="9" cy="9" r="9" fill="url(#nlg1)" fill-opacity="0.9"/>
+      <circle cx="19" cy="9" r="9" fill="url(#nlg2)" fill-opacity="0.75"/>
+      <defs>
+        <linearGradient id="nlg1" x1="0" y1="0" x2="18" y2="18" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/>
+        </linearGradient>
+        <linearGradient id="nlg2" x1="10" y1="0" x2="28" y2="18" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    AI <span class="nav-x">×</span> Humanity
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="tech-lab.html" class="active">Tech Lab</a></li>
+    <li><a href="#">Learn</a></li>
+    <li><a href="#">Connect</a></li>
+  </ul>
+  <a href="#avatar" class="btn btn-primary nav-cta-desktop" style="padding:9px 18px; font-size:13px;">Try AI Twin →</a>
+  <button class="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── FEATURE NAV ───────────────────────────────────────── -->
+<div class="feature-nav">
+  <div class="feature-nav-inner">
+    <a href="#avatar"    class="fnav-item active"><span class="fnav-num">01</span> 3D Avatar</a>
+    <a href="#chatbot"   class="fnav-item"><span class="fnav-num">02</span> AI Chatbot</a>
+    <a href="#videogen"  class="fnav-item"><span class="fnav-num">03</span> Video Generation</a>
+    <a href="#search"    class="fnav-item"><span class="fnav-num">04</span> Video Search</a>
+  </div>
+</div>
+
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="label">Tech Lab</div>
+      <h1>This is what the future<br>of learning <span class="gradient-text">feels like.</span></h1>
+      <p class="hero-sub">
+        Four AI technologies, live and interactive. Each one demonstrates a different
+        dimension of how [Name] is using AI to make knowledge more human.
+      </p>
+
+      <div class="feature-cards">
+        <a href="#avatar" class="feature-card-link">
+          <div class="fc-num">01</div>
+          <div class="fc-icon">🧬</div>
+          <div class="fc-title">3D Avatar</div>
+          <div class="fc-desc">Meet [Name]'s digital twin in real time</div>
+          <span class="fc-arrow">Try it →</span>
+        </a>
+        <a href="#chatbot" class="feature-card-link">
+          <div class="fc-num">02</div>
+          <div class="fc-icon">💬</div>
+          <div class="fc-title">AI Chatbot</div>
+          <div class="fc-desc">Ask anything by voice or text</div>
+          <span class="fc-arrow">Start chatting →</span>
+        </a>
+        <a href="#videogen" class="feature-card-link">
+          <div class="fc-num">03</div>
+          <div class="fc-icon">🎬</div>
+          <div class="fc-title">Video Generation</div>
+          <div class="fc-desc">AI-generated video with digital presenter</div>
+          <span class="fc-arrow">Watch demo →</span>
+        </a>
+        <a href="#search" class="feature-card-link">
+          <div class="fc-num">04</div>
+          <div class="fc-icon">🔍</div>
+          <div class="fc-title">Video Search</div>
+          <div class="fc-desc">Search hours of content by question</div>
+          <span class="fc-arrow">Search now →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 01 — 3D AVATAR                                         -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="tech-section" id="avatar">
+  <div class="section-num">01</div>
+  <div class="container">
+    <div class="tech-grid">
+
+      <!-- Content -->
+      <div class="tech-content">
+        <div class="label">Experience 01</div>
+        <h2>Meet [Name]'s<br><span class="gradient-text">Digital Twin</span></h2>
+        <div class="tech-body">
+          <p>
+            A photorealistic 3D avatar, built from [Name]'s voice, likeness, and thinking.
+            It responds in real time — to your face, your voice, your questions.
+          </p>
+          <p>
+            This isn't a pre-recorded video. It's a live, generative experience that
+            adapts to every person who interacts with it.
+          </p>
+        </div>
+        <ul class="feature-list">
+          <li>Real-time facial and voice interaction</li>
+          <li>Responds in [Name]'s voice and mannerisms</li>
+          <li>Available in browser — no download required</li>
+          <li>Powered by [placeholder: AI platform name]</li>
+        </ul>
+        <div class="accordion">
+          <button class="accordion-trigger">
+            How does this work? <span class="accordion-arrow">▾</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <ol>
+                <li>[Name]'s voice, likeness, and speech patterns were captured and used to train a personalised avatar model.</li>
+                <li>The 3D rendering engine generates facial expressions and lip sync in real time based on AI-generated speech.</li>
+                <li>A language model fine-tuned on [Name]'s content handles the conversation logic and produces responses in character.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="tech-ctas" style="margin-top: 28px;">
+          <a href="#" class="btn btn-primary btn-lg">Launch Avatar →</a>
+          <a href="#" class="btn btn-outline btn-lg">Watch a demo</a>
+        </div>
+      </div>
+
+      <!-- Visual -->
+      <div class="mockup-wrap">
+        <div class="avatar-stage">
+          <div class="av-orbit av-orbit-3"><div class="av-orbit-dot"></div></div>
+          <div class="av-orbit av-orbit-2"><div class="av-orbit-dot"></div></div>
+          <div class="av-orbit av-orbit-1"><div class="av-orbit-dot"></div></div>
+          <div class="av-disc">
+            <div class="av-label">
+              <strong>3D Avatar</strong>
+              [Name]'s<br>Digital Twin
+            </div>
+          </div>
+          <div class="av-tag av-tag-1">🎙 Voice-enabled</div>
+          <div class="av-tag av-tag-2">⚡ Real-time</div>
+          <div class="av-tag av-tag-3">🧠 AI-powered</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 02 — AI CHATBOT                                        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="tech-section" id="chatbot">
+  <div class="section-num">02</div>
+  <div class="container">
+    <div class="tech-grid reverse">
+
+      <!-- Visual -->
+      <div class="mockup-wrap">
+        <div class="chat-mockup">
+          <div class="chat-header">
+            <div class="chat-avatar">AI</div>
+            <div>
+              <div class="chat-name">[Name]'s AI</div>
+              <div class="chat-status"><span class="status-dot"></span> Online now</div>
+            </div>
+            <div class="chat-mode-toggle">
+              <button class="mode-btn active">Text</button>
+              <button class="mode-btn">🎙 Voice</button>
+            </div>
+          </div>
+
+          <div class="chat-messages">
+            <div class="chat-msg ai">
+              <div class="msg-avatar ai">AI</div>
+              <div class="msg-bubble">
+                Hi — I'm [Name]'s AI. Ask me anything about AI, education, or the future of learning. What's on your mind?
+              </div>
+            </div>
+            <div class="chat-msg user">
+              <div class="msg-avatar human">You</div>
+              <div class="msg-bubble">
+                How will AI change the way students learn?
+              </div>
+            </div>
+            <div class="chat-msg ai">
+              <div class="msg-avatar ai">AI</div>
+              <div class="msg-bubble">
+                The shift is already happening — AI is moving education from a broadcast model to a dialogue model. Students can now have personalised conversations with knowledge itself. The key challenge isn't access to AI. It's learning how to ask the right questions.
+              </div>
+            </div>
+            <div class="chat-msg ai">
+              <div class="msg-avatar ai">AI</div>
+              <div class="msg-bubble">
+                <div class="typing-indicator">
+                  <div class="typing-dot"></div>
+                  <div class="typing-dot"></div>
+                  <div class="typing-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sample-qs">
+            <button class="sample-q">What's your take on AI in schools?</button>
+            <button class="sample-q">Tell me about your e-book</button>
+            <button class="sample-q">Where do I start with AI?</button>
+          </div>
+
+          <div class="chat-input-bar">
+            <input class="chat-input" type="text" placeholder="Ask [Name]'s AI anything…" readonly>
+            <button class="chat-mic">🎙</button>
+            <button class="chat-send">➤</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="tech-content">
+        <div class="label">Experience 02</div>
+        <h2>Ask anything.<br><span class="gradient-text">By voice or text.</span></h2>
+        <div class="tech-body">
+          <p>
+            [Name]'s AI chatbot is trained on his talks, writing, podcast episodes, and
+            e-book. It answers the way he would — with context, nuance, and a point of view.
+          </p>
+          <p>
+            Switch between text and voice mode at any time. No sign-up needed.
+          </p>
+        </div>
+        <ul class="feature-list">
+          <li>Text and voice input, voice output</li>
+          <li>Trained on [Name]'s actual content library</li>
+          <li>Cites specific episodes or chapters when relevant</li>
+          <li>Available 24/7 — no scheduling needed</li>
+        </ul>
+        <div class="accordion">
+          <button class="accordion-trigger">
+            How does this work? <span class="accordion-arrow">▾</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <ol>
+                <li>All of [Name]'s content — podcast transcripts, e-book, slides — is indexed and embedded into a knowledge base.</li>
+                <li>When you ask a question, the system retrieves the most relevant passages from that knowledge base.</li>
+                <li>A language model synthesises those passages into a response in [Name]'s tone and voice.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="tech-ctas" style="margin-top: 28px;">
+          <a href="#" class="btn btn-primary btn-lg">Start Chatting →</a>
+          <a href="#" class="btn btn-outline btn-lg">Try voice mode 🎙</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 03 — VIDEO GENERATION                                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="tech-section" id="videogen">
+  <div class="section-num">03</div>
+  <div class="container">
+    <div class="tech-grid">
+
+      <!-- Content -->
+      <div class="tech-content">
+        <div class="label">Experience 03</div>
+        <h2>AI-generated video<br>with a <span class="gradient-text">digital presenter.</span></h2>
+        <div class="tech-body">
+          <p>
+            Type a script — or let AI write one from your topic — and watch [Name]'s
+            avatar deliver it as a polished video. No cameras, no studios, no scheduling.
+          </p>
+          <p>
+            This is how [Name] is scaling his voice across languages, formats, and audiences
+            without being in the room.
+          </p>
+        </div>
+        <ul class="feature-list">
+          <li>Text-to-video in minutes, not days</li>
+          <li>Synced lip movement, natural gestures</li>
+          <li>Available in multiple languages</li>
+          <li>Powered by [placeholder: video AI platform]</li>
+        </ul>
+        <div class="accordion">
+          <button class="accordion-trigger">
+            How does this work? <span class="accordion-arrow">▾</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <ol>
+                <li>A text script is submitted — either written manually or generated from a topic using AI.</li>
+                <li>A text-to-speech model generates audio in [Name]'s cloned voice.</li>
+                <li>The video generation model renders [Name]'s 3D avatar speaking the script, with synced lips, expressions, and gestures.</li>
+                <li>The final video is exported and ready to share.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="tech-ctas" style="margin-top: 28px;">
+          <a href="#" class="btn btn-primary btn-lg">Watch Demo →</a>
+          <a href="#" class="btn btn-outline btn-lg">See example videos</a>
+        </div>
+      </div>
+
+      <!-- Visual -->
+      <div class="mockup-wrap">
+        <div class="videogen-mockup">
+          <div class="video-player">
+            <div class="video-bg">
+              <div class="video-presenter">
+                [Name]<br>Avatar
+              </div>
+            </div>
+            <div class="video-badge">AI GENERATED</div>
+            <div class="video-play-btn">▶</div>
+            <div class="video-controls">
+              <div class="video-progress">
+                <div class="video-progress-fill"></div>
+              </div>
+              <div class="video-time">1:24 / 4:30</div>
+            </div>
+          </div>
+
+          <div class="pipeline">
+            <div class="pipe-step">
+              <div class="pipe-icon">📝</div>
+              <div class="pipe-label">Script</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-icon">🎙</div>
+              <div class="pipe-label">AI Voice</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-icon">🧬</div>
+              <div class="pipe-label">Avatar</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-icon">🎬</div>
+              <div class="pipe-label">Video</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 04 — VIDEO SEARCH                                      -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="tech-section" id="search">
+  <div class="section-num">04</div>
+  <div class="container">
+    <div class="tech-grid reverse">
+
+      <!-- Visual -->
+      <div class="mockup-wrap">
+        <div class="search-mockup">
+          <div class="search-bar-wrap">
+            <span class="search-icon">🔍</span>
+            <span class="search-query"><strong>"What does [Name] say about the future of teachers?"</strong></span>
+            <span class="search-clear">✕</span>
+          </div>
+          <div class="search-results">
+            <div class="result-card">
+              <div class="result-thumb rt-1">🎙</div>
+              <div class="result-info">
+                <div class="result-ep">Ep. 12 — Podcast</div>
+                <div class="result-title">Teachers in the Age of AI</div>
+                <div class="result-meta">AI & Humanity Series · 48 min</div>
+              </div>
+              <div class="result-timestamp">▶ 12:34</div>
+            </div>
+            <div class="result-card">
+              <div class="result-thumb rt-2">📖</div>
+              <div class="result-info">
+                <div class="result-ep">Chapter 4 — E-Book</div>
+                <div class="result-title">The Irreplaceable Human Teacher</div>
+                <div class="result-meta">[E-Book Title] · 6 min read</div>
+              </div>
+              <div class="result-timestamp">p. 41</div>
+            </div>
+            <div class="result-card">
+              <div class="result-thumb rt-3">🎥</div>
+              <div class="result-info">
+                <div class="result-ep">Keynote — Library</div>
+                <div class="result-title">Redefining the Classroom</div>
+                <div class="result-meta">[Conference Name] · 22 min</div>
+              </div>
+              <div class="result-timestamp">▶ 07:50</div>
+            </div>
+          </div>
+          <div class="search-hint">🔎 Found 3 results across podcast, e-book, and library</div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="tech-content">
+        <div class="label">Experience 04</div>
+        <h2>Search across everything<br><span class="gradient-text">[Name] has ever said.</span></h2>
+        <div class="tech-body">
+          <p>
+            Instead of scrolling through hours of video, type a question and get
+            direct results — timestamped clips, book pages, and slides — all from
+            [Name]'s content library.
+          </p>
+          <p>
+            It searches meaning, not just matching words. Ask it like you'd ask a person.
+          </p>
+        </div>
+        <ul class="feature-list">
+          <li>Searches podcast, e-book, and video library simultaneously</li>
+          <li>Semantic search — understands what you mean, not just what you typed</li>
+          <li>Results link directly to the relevant timestamp or page</li>
+          <li>Works in natural language — no keywords needed</li>
+        </ul>
+        <div class="accordion">
+          <button class="accordion-trigger">
+            How does this work? <span class="accordion-arrow">▾</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <ol>
+                <li>All video transcripts, e-book text, and slide content are processed and stored as searchable semantic embeddings.</li>
+                <li>When you search, your query is compared against those embeddings to find the closest matches by meaning.</li>
+                <li>Results are ranked by relevance and returned with links to exact timestamps or page numbers.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="tech-ctas" style="margin-top: 28px;">
+          <a href="#" class="btn btn-primary btn-lg">Search the Library →</a>
+          <a href="#" class="btn btn-outline btn-lg">Browse all content</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── BOTTOM CTA ─────────────────────────────────────────── -->
+<div class="bottom-cta">
+  <div class="container">
+    <div class="cta-box">
+      <div class="label" style="justify-content:center;">Go Deeper</div>
+      <h2>The technology is the entrance.<br><span class="gradient-text">The content is the journey.</span></h2>
+      <p>Explore [Name]'s podcast, e-book, and full video library.</p>
+      <div class="cta-btns">
+        <a href="#" class="btn btn-primary btn-lg">Explore the Learn page →</a>
+        <a href="about.html" class="btn btn-outline btn-lg">About [Name]</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-mark" width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="9" cy="9" r="9" fill="url(#flg1)" fill-opacity="0.9"/>
+        <circle cx="19" cy="9" r="9" fill="url(#flg2)" fill-opacity="0.75"/>
+        <defs>
+          <linearGradient id="flg1" x1="0" y1="0" x2="18" y2="18" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/>
+          </linearGradient>
+          <linearGradient id="flg2" x1="10" y1="0" x2="28" y2="18" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      AI <span class="nav-x">×</span> Humanity
+    </a>
+    <ul class="footer-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="tech-lab.html">Tech Lab</a></li>
+      <li><a href="#">Learn</a></li>
+      <li><a href="#">Connect</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+    <span class="footer-copy">© 2025 [Name]. All rights reserved.</span>
+  </div>
+</footer>
+
+
+<!-- ── FLOATING CHAT ──────────────────────────────────────── -->
+<div class="chat-fab">
+  <div class="chat-tooltip">Chat with [Name]'s AI</div>
+  <button class="chat-btn" aria-label="Open AI chat">💬</button>
+</div>
+
+
+<script>
+  // Feature nav highlight on scroll
+  const sections = ['avatar','chatbot','videogen','search'];
+  const navItems = document.querySelectorAll('.fnav-item');
+  window.addEventListener('scroll', () => {
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 160) current = id;
+    });
+    navItems.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // Accordion
+  document.querySelectorAll('.accordion-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const body = btn.nextElementSibling;
+      const isOpen = btn.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.accordion-trigger').forEach(b => {
+        b.classList.remove('open');
+        b.nextElementSibling.style.maxHeight = null;
+      });
+      // Open this one if it was closed
+      if (!isOpen) {
+        btn.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
