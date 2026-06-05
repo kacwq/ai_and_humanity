@@ -234,6 +234,21 @@
     .accordion-body-inner ol { padding-left: 18px; }
     .accordion-body-inner ol li { margin-bottom: 8px; }
 
+    /* Why this matters callout */
+    .why-matters {
+      border-left: 3px solid var(--accent-light);
+      padding: 16px 20px;
+      background: rgba(124,58,237,0.06);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 24px 0 28px;
+    }
+    .why-matters-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent-light);
+      margin-bottom: 8px; display: block;
+    }
+    .why-matters p { font-size: 14.5px; color: var(--text); line-height: 1.7; }
+
     .tech-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 
     /* ─── Visual Mockups ─────────────────────────────────── */
@@ -578,7 +593,6 @@
     <li><a href="about.html">About</a></li>
     <li><a href="tech-lab.html" class="active">Tech Lab</a></li>
     <li><a href="learn.html">Learn</a></li>
-    <li><a href="connect.html">Connect</a></li>
   </ul>
   <a href="#avatar" class="btn btn-primary nav-cta-desktop" style="padding:9px 18px; font-size:13px;">Try AI Twin →</a>
   <button class="hamburger" aria-label="Menu">
@@ -605,8 +619,8 @@
       <div class="label">Tech Lab</div>
       <h1>This is what the future<br>of learning <span class="gradient-text">feels like.</span></h1>
       <p class="hero-sub">
-        Four AI technologies, live and interactive. Each one demonstrates a different
-        dimension of how [Name] is using AI to make knowledge more human.
+        Four AI technologies, live and interactive. Each one is a window into what
+        AI and humanity look like when they work together — not in the abstract, but right now.
       </p>
 
       <div class="feature-cards">
@@ -686,7 +700,11 @@
             </div>
           </div>
         </div>
-        <div class="tech-ctas" style="margin-top: 28px;">
+        <div class="why-matters">
+          <span class="why-matters-label">Why this matters</span>
+          <p>When a person's knowledge and presence can exist anywhere — simultaneously, at unlimited scale — the geography of learning collapses. A student anywhere in the world gets the same depth of engagement as someone in the front row.</p>
+        </div>
+        <div class="tech-ctas">
           <a href="#" class="btn btn-primary btn-lg">Launch Avatar →</a>
           <a href="#" class="btn btn-outline btn-lg">Watch a demo</a>
         </div>
@@ -816,7 +834,11 @@
             </div>
           </div>
         </div>
-        <div class="tech-ctas" style="margin-top: 28px;">
+        <div class="why-matters">
+          <span class="why-matters-label">Why this matters</span>
+          <p>The future of education isn't a textbook — it's a dialogue. When AI carries a real person's perspective into a conversation, learning stops being something you receive and becomes something you actively explore.</p>
+        </div>
+        <div class="tech-ctas">
           <a href="#" class="btn btn-primary btn-lg">Start Chatting →</a>
           <a href="#" class="btn btn-outline btn-lg">Try voice mode 🎙</a>
         </div>
@@ -870,7 +892,11 @@
             </div>
           </div>
         </div>
-        <div class="tech-ctas" style="margin-top: 28px;">
+        <div class="why-matters">
+          <span class="why-matters-label">Why this matters</span>
+          <p>One educator. Any language. Any format. At any scale. AI doesn't replace the human teacher — it removes the constraints that kept their knowledge from reaching everyone who needs it.</p>
+        </div>
+        <div class="tech-ctas">
           <a href="#" class="btn btn-primary btn-lg">Watch Demo →</a>
           <a href="#" class="btn btn-outline btn-lg">See example videos</a>
         </div>
@@ -1004,7 +1030,11 @@
             </div>
           </div>
         </div>
-        <div class="tech-ctas" style="margin-top: 28px;">
+        <div class="why-matters">
+          <span class="why-matters-label">Why this matters</span>
+          <p>The bottleneck in learning has never been the availability of knowledge. It's the ability to find the right piece at the right moment. Semantic search removes that bottleneck — and what remains is pure curiosity.</p>
+        </div>
+        <div class="tech-ctas">
           <a href="#" class="btn btn-primary btn-lg">Search the Library →</a>
           <a href="#" class="btn btn-outline btn-lg">Browse all content</a>
         </div>
@@ -1019,12 +1049,12 @@
 <div class="bottom-cta">
   <div class="container">
     <div class="cta-box">
-      <div class="label" style="justify-content:center;">Go Deeper</div>
-      <h2>The technology is the entrance.<br><span class="gradient-text">The content is the journey.</span></h2>
-      <p>Explore [Name]'s podcast, e-book, and full video library.</p>
+      <div class="label" style="justify-content:center;">The Bigger Picture</div>
+      <h2>This is what<br><span class="gradient-text">AI × Humanity</span> looks like.</h2>
+      <p>Not a prediction. Not a concept. A lived demonstration of what becomes possible when AI amplifies human knowledge — making it more accessible, more personal, and more present than ever before.</p>
       <div class="cta-btns">
-        <a href="#" class="btn btn-primary btn-lg">Explore the Learn page →</a>
-        <a href="about.html" class="btn btn-outline btn-lg">About [Name]</a>
+        <a href="about.html" class="btn btn-primary btn-lg">Meet [Name] →</a>
+        <a href="learn.html" class="btn btn-outline btn-lg">Explore the ideas behind the tech</a>
       </div>
     </div>
   </div>
@@ -1053,8 +1083,7 @@
       <li><a href="about.html">About</a></li>
       <li><a href="tech-lab.html">Tech Lab</a></li>
       <li><a href="learn.html">Learn</a></li>
-      <li><a href="connect.html">Connect</a></li>
-      <li><a href="#">Privacy</a></li>
+        <li><a href="#">Privacy</a></li>
     </ul>
     <span class="footer-copy">© 2025 [Name]. All rights reserved.</span>
   </div>
