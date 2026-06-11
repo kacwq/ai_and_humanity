@@ -123,7 +123,7 @@
     .vb-4 { bottom: 12%; right: 5%; animation-delay: 1.5s; }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
-    /* ─── Question Section ───────────────────────────────── */
+    /* ─── Why It Matters ─────────────────────────────────── */
     .question-section { border-top: 1px solid var(--border); }
     .question-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .big-question { font-size: clamp(48px, 7vw, 88px); font-weight: 900; line-height: 1; letter-spacing: -0.04em; }
@@ -148,42 +148,9 @@
     .tech-card:hover::before { opacity: 1; }
     .tc-number { font-size: 11px; font-weight: 700; color: var(--text-dim); letter-spacing: 0.08em; margin-bottom: 16px; }
     .tc-icon { font-size: 32px; margin-bottom: 14px; }
-    .tc-concept { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 6px; }
-    .tc-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .tc-concept { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
     .tc-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 18px; }
     .tc-link { font-size: 13px; font-weight: 600; color: var(--accent-light); display: inline-flex; align-items: center; gap: 4px; }
-
-    /* ─── The Expert ─────────────────────────────────────── */
-    .expert-section { border-top: 1px solid var(--border); }
-    .expert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .expert-photo {
-      aspect-ratio: 3/4; max-width: 360px;
-      border-radius: 20px;
-      background: linear-gradient(160deg, rgba(124,58,237,0.22) 0%, rgba(99,102,241,0.1) 40%, rgba(8,8,16,0.9) 100%);
-      border: 1px solid rgba(124,58,237,0.18);
-      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-      padding-bottom: 28px; position: relative; overflow: hidden;
-    }
-    .expert-photo::before { content: ''; position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, rgba(124,58,237,0.4), rgba(236,72,153,0.2)); border: 1px solid rgba(124,58,237,0.3); }
-    .expert-photo::after { content: ''; position: absolute; top: calc(15% + 90px); left: 50%; transform: translateX(-50%); width: 160px; height: 180px; border-radius: 50% 50% 0 0; background: linear-gradient(180deg, rgba(124,58,237,0.18), transparent); }
-    .expert-photo-label { font-size: 12px; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; position: relative; z-index: 1; }
-    .expert-name { font-size: clamp(28px, 3vw, 42px); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 8px; }
-    .expert-title { font-size: 15px; color: var(--accent-light); font-weight: 500; margin-bottom: 20px; }
-    .expert-bio { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 32px; }
-
-    /* Content cards */
-    .content-cards { display: flex; flex-direction: column; gap: 14px; }
-    .content-card { display: flex; gap: 16px; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; text-decoration: none; color: var(--text); transition: all 0.2s; }
-    .content-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); transform: translateX(4px); }
-    .content-card-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-    .cc-book { background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(124,58,237,0.15)); }
-    .cc-podcast { background: linear-gradient(135deg, rgba(236,72,153,0.2), rgba(139,92,246,0.15)); }
-    .content-card-text { flex: 1; min-width: 0; }
-    .cc-type { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 3px; }
-    .cc-title { font-size: 14px; font-weight: 600; line-height: 1.35; }
-    .cc-meta { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
-    .cc-arrow { font-size: 16px; color: var(--text-dim); flex-shrink: 0; transition: transform 0.2s; }
-    .content-card:hover .cc-arrow { transform: translateX(4px); color: var(--accent-light); }
 
     /* ─── Closing CTA ────────────────────────────────────── */
     .closing-cta { border-top: 1px solid var(--border); }
@@ -225,8 +192,6 @@
       .venn-intersection { width: 72px; height: 112px; }
       .question-grid { grid-template-columns: 1fr; gap: 48px; }
       .tech-grid { grid-template-columns: 1fr 1fr; }
-      .expert-grid { grid-template-columns: 1fr; gap: 40px; }
-      .expert-photo { max-width: 100%; aspect-ratio: 4/3; }
       .cta-box { padding: 56px 24px; }
       section { padding: 72px 0; }
       footer { padding: 36px 24px; }
@@ -271,15 +236,15 @@
     <div class="hero-inner">
 
       <div>
-        <div class="hero-eyebrow">Videospace · A live investigation</div>
-        <h1><span class="gradient-text">Alpha</span><br>or<br><span style="color:var(--text-muted)">Omega?</span></h1>
+        <div class="hero-eyebrow">Videospace · The Future of Learning</div>
+        <h1><span class="gradient-text">Alpha</span><br>or<br><span style="color:var(--text-muted)">Omega</span></h1>
         <p class="hero-sub">
-          AI is being shaped — right now, by decisions made in real time.
-          This is Videospace's live investigation into what it means to shape it well.
+          The way we learn is changing faster than our classrooms can keep up.
+          AI is creating a new kind of education — where expert knowledge reaches everyone,
+          in any language, at any scale. This is what that future looks like, live.
         </p>
         <div class="hero-ctas">
           <a href="tech-lab.html" class="btn btn-primary btn-lg">Experience the Tech →</a>
-          <a href="#what" class="btn btn-outline btn-lg">What is AI × Humanity?</a>
         </div>
       </div>
 
@@ -303,8 +268,8 @@
 </div>
 
 
-<!-- ── WHAT IS AI × HUMANITY ─────────────────────────────── -->
-<section id="what" class="question-section">
+<!-- ── WHY IT MATTERS ─────────────────────────────────────── -->
+<section id="why" class="question-section">
   <div class="container">
     <div class="question-grid">
 
@@ -313,45 +278,47 @@
         <div class="big-question">
           <span class="gradient-text">Alpha</span>
           <span class="question-or">or</span>
-          <span style="color:var(--text-muted);">Omega?</span>
+          <span style="color:var(--text-muted);">Omega</span>
         </div>
         <p style="font-size:16px; color:var(--text-dim); margin-top:20px; line-height:1.7;">
-          From the book: <em>AI and Humanity: Alpha or Omega?<br>Shaping Our Destiny in the Age of AI</em>
+          From the book: <em>AI and Humanity: Alpha or Omega<br>Shaping Our Destiny in the Age of AI</em>
         </p>
       </div>
 
       <div>
-        <div class="label">The Vision</div>
+        <div class="label">Why It Matters</div>
         <div class="question-body">
           <p>
-            AI × Humanity is not a tagline. It is a position: that the relationship between
-            artificial intelligence and the people it affects is not inevitable — it is designed.
+            Education has always been limited by access — access to great teachers,
+            the right content, at the right time, in the right language.
+            AI removes those limits.
           </p>
           <p>
-            The question is whether we design it consciously, or let it design us.
-            Videospace was built to demonstrate — not just argue — what conscious design looks like.
+            The question is whether we use that power to reach every learner —
+            or leave it in the hands of the few who already have access.
+            Videospace was built to show what the right choice looks like.
           </p>
         </div>
         <ul class="idea-list">
           <li class="idea-item">
-            <div class="idea-icon">🔬</div>
+            <div class="idea-icon">🎓</div>
             <div>
-              <h3>Show, don't tell</h3>
-              <p>Every concept here is live and interactive. Experience the technology before forming an opinion of it.</p>
+              <h3>One expert, every learner</h3>
+              <p>AI lets a single expert's knowledge reach millions. Not a recording — a real conversation, personalised, available any time.</p>
             </div>
           </li>
           <li class="idea-item">
-            <div class="idea-icon">🤝</div>
+            <div class="idea-icon">🌍</div>
             <div>
-              <h3>AI amplifies, not replaces</h3>
-              <p>The tools on this site extend a human — their voice, their knowledge, their reach. The human remains the source.</p>
+              <h3>No language barrier</h3>
+              <p>A student in Lagos and a student in Oslo get the same quality of instruction — in their own language, from the same source.</p>
             </div>
           </li>
           <li class="idea-item">
-            <div class="idea-icon">🌐</div>
+            <div class="idea-icon">⏱</div>
             <div>
-              <h3>Knowledge without borders</h3>
-              <p>The future of learning is not about access to content. It's about access to genuine expertise, at any scale, in any language.</p>
+              <h3>Knowledge on demand</h3>
+              <p>Ask any question. Find the exact answer in hours of expert content. No searching, no skimming — just the answer you need.</p>
             </div>
           </li>
         </ul>
@@ -367,88 +334,38 @@
   <div class="container">
     <div class="tech-preview-header">
       <div class="label" style="justify-content:center;">The Demonstration</div>
-      <h2>Four technologies.<br>One argument.</h2>
-      <p>Each one is a working proof of what AI and humanity look like when they work together.</p>
+      <h2>Four technologies.<br>One classroom.</h2>
+      <p>Each one solves a different problem in education. Together, they show what personalised, accessible learning looks like at scale.</p>
     </div>
     <div class="tech-grid">
       <a href="tech-lab.html#videogen" class="tech-card">
         <div class="tc-number">01</div>
         <div class="tc-icon">🎬</div>
         <div class="tc-concept">Video Generation</div>
-        <div class="tc-title">The Story</div>
-        <div class="tc-desc">AI creates video of a digital presenter from a script. One voice, any language, at unlimited scale.</div>
+        <div class="tc-desc">Turn any lesson into a multilingual video. One educator's voice — every student, in their own language.</div>
         <span class="tc-link">Experience it →</span>
       </a>
       <a href="tech-lab.html#search" class="tech-card">
         <div class="tc-number">02</div>
         <div class="tc-icon">🔍</div>
         <div class="tc-concept">Video Search</div>
-        <div class="tc-title">The Memory</div>
-        <div class="tc-desc">Ask a question in plain language. Find the exact moment in hours of video where it's answered.</div>
+        <div class="tc-desc">Ask a question in plain language. Find the exact moment in hours of lecture where it's answered.</div>
         <span class="tc-link">Experience it →</span>
       </a>
       <a href="tech-lab.html#avatar" class="tech-card">
         <div class="tc-number">03</div>
         <div class="tc-icon">🧬</div>
         <div class="tc-concept">3D Avatar</div>
-        <div class="tc-title">The Presence</div>
-        <div class="tc-desc">A digital twin — a real person's face, voice, and expressions — that responds in real time.</div>
+        <div class="tc-desc">A digital educator that shows up for every student, any time. Real expressions, real voice, real presence.</div>
         <span class="tc-link">Experience it →</span>
       </a>
       <a href="tech-lab.html#chatbot" class="tech-card">
         <div class="tc-number">04</div>
         <div class="tc-icon">💬</div>
         <div class="tc-concept">AI Chatbot</div>
-        <div class="tc-title">The Dialogue</div>
-        <div class="tc-desc">An AI trained on a person's knowledge. Have a real conversation with their expertise, any time.</div>
+        <div class="tc-desc">Trained on an expert's knowledge. Every student gets one-on-one access to the expertise they need, any time.</div>
         <span class="tc-link">Experience it →</span>
       </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ── THE EXPERT ─────────────────────────────────────────── -->
-<section class="expert-section">
-  <div class="container">
-    <div class="expert-grid">
-
-      <div class="expert-photo">
-        <span class="expert-photo-label">[ Photo of [Name] ]</span>
-      </div>
-
-      <div>
-        <div class="label">The Mind Behind It</div>
-        <div class="expert-name">[Name]</div>
-        <div class="expert-title">[Title / Role — e.g. AI Strategist & Educator]</div>
-        <p class="expert-bio">
-          [Name] has spent [X] years at the intersection of artificial intelligence and human learning.
-          The AI × Humanity project — the podcast, the book, and this site — is [his/her/their]
-          ongoing investigation into the most consequential relationship of our time.
-        </p>
-
-        <div class="content-cards">
-          <a href="https://youtube.com/playlist?list=PLbXgTi79jSSYXAEDVQWSCwgsC6CGgVaLy" target="_blank" rel="noopener" class="content-card">
-            <div class="content-card-icon cc-podcast">🎙</div>
-            <div class="content-card-text">
-              <div class="cc-type">Podcast · YouTube</div>
-              <div class="cc-title">AI × Humanity — The Series</div>
-              <div class="cc-meta">Watch the full playlist →</div>
-            </div>
-            <div class="cc-arrow">↗</div>
-          </a>
-          <a href="#" class="content-card">
-            <div class="content-card-icon cc-book">📖</div>
-            <div class="content-card-text">
-              <div class="cc-type">Book</div>
-              <div class="cc-title">AI and Humanity: Alpha or Omega?<br>Shaping Our Destiny in the Age of AI</div>
-              <div class="cc-meta">by [Name]</div>
-            </div>
-            <div class="cc-arrow">↗</div>
-          </a>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -458,9 +375,9 @@
 <section class="closing-cta">
   <div class="container">
     <div class="cta-box">
-      <div class="label" style="justify-content:center;">Don't just read about it</div>
-      <h2>The argument is live.<br><span class="gradient-text">Experience it.</span></h2>
-      <p>Four AI technologies, built to show what the future of learning looks like when humanity stays in the room.</p>
+      <div class="label" style="justify-content:center;">See it in action</div>
+      <h2>The future of learning<br><span class="gradient-text">is already here.</span></h2>
+      <p>Personalised, borderless, and built on the best of what makes us human. Four technologies. One live demonstration.</p>
       <div class="cta-btns">
         <a href="tech-lab.html" class="btn btn-primary btn-lg">Enter the Tech Lab →</a>
       </div>
