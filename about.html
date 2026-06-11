@@ -98,11 +98,11 @@
     }
     .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
     .btn-outline {
-      border: 1px solid var(--border-hover);
+      border: 1.5px solid rgba(255,255,255,0.4);
       color: var(--text);
       background: rgba(255,255,255,0.03);
     }
-    .btn-outline:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.25); }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.65); }
     .btn-lg { padding: 15px 30px; font-size: 16px; border-radius: 11px; }
 
     /* ─── Layout ─────────────────────────────────────────── */
@@ -718,26 +718,25 @@
 <!-- ── NAV ──────────────────────────────────────────────── -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <svg class="nav-logo-mark" width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="9" cy="9" r="9" fill="url(#anlg1)" fill-opacity="0.9"/>
-      <circle cx="19" cy="9" r="9" fill="url(#anlg2)" fill-opacity="0.75"/>
+    <svg class="nav-logo-mark" width="36" height="22" viewBox="0 0 36 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="11" cy="11" r="11" fill="url(#anlg1)" fill-opacity="0.9"/>
+      <circle cx="25" cy="11" r="11" fill="url(#anlg2)" fill-opacity="0.75"/>
       <defs>
-        <linearGradient id="anlg1" x1="0" y1="0" x2="18" y2="18" gradientUnits="userSpaceOnUse">
+        <linearGradient id="anlg1" x1="0" y1="0" x2="22" y2="22" gradientUnits="userSpaceOnUse">
           <stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/>
         </linearGradient>
-        <linearGradient id="anlg2" x1="10" y1="0" x2="28" y2="18" gradientUnits="userSpaceOnUse">
+        <linearGradient id="anlg2" x1="14" y1="0" x2="36" y2="22" gradientUnits="userSpaceOnUse">
           <stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/>
         </linearGradient>
       </defs>
     </svg>
-    AI <span class="nav-x">×</span> Humanity
   </a>
   <ul class="nav-links">
     <li><a href="about.html" class="active">About</a></li>
     <li><a href="tech-lab.html">Tech Lab</a></li>
     <li><a href="learn.html">Learn</a></li>
   </ul>
-  <a href="#" class="btn btn-primary nav-cta-desktop" style="padding:9px 18px; font-size:13px;">Try AI Twin →</a>
+  <a href="tech-lab.html" class="btn btn-primary nav-cta-desktop" style="padding:9px 18px; font-size:13px;">Experience Now →</a>
   <button class="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>

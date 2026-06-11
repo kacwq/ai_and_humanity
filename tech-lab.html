@@ -29,20 +29,22 @@
     .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 9px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.2s ease; border: none; font-family: inherit; }
     .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 4px 24px rgba(124,58,237,0.35); }
     .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
-    .btn-outline { border: 1px solid var(--border-hover); color: var(--text); background: rgba(255,255,255,0.03); }
-    .btn-outline:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.25); }
+    .btn-outline { border: 1.5px solid rgba(255,255,255,0.4); color: var(--text); background: rgba(255,255,255,0.05); }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.65); }
     .btn-lg { padding: 15px 30px; font-size: 16px; border-radius: 11px; }
 
     .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 
     /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 40px; height: 68px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,8,16,0.75); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
     .nav-logo-mark { flex-shrink: 0; display: block; }
-    .nav-x { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 300; margin: 0 1px; }
-    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
-    .nav-logo-name { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; line-height: 1; }
-    .nav-by { font-size: 10px; font-weight: 500; color: var(--text-dim); letter-spacing: 0.05em; line-height: 1; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-muted); border-radius: 2px; }
 
     /* Hero */
     .hero { padding: calc(68px + 80px) 0 80px; position: relative; overflow: hidden; text-align: center; }
@@ -58,24 +60,10 @@
     .exp-card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); transform: translateY(-4px); }
     .exp-card:hover::before { opacity: 1; }
     .exp-num { font-size: 52px; font-weight: 900; line-height: 1; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
-    .exp-name { font-size: 24px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
-    .exp-def { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+    .exp-name { font-size: 24px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.02em; }
     .exp-tag { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px; }
-    .exp-enter { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--accent-light); transition: gap 0.15s; }
-    .exp-card:hover .exp-enter { gap: 10px; }
-
-    /* Journey section */
-    .the-journey { padding: 80px 0 100px; border-top: 1px solid var(--border); }
-    .journey-thesis { max-width: 680px; font-size: 18px; color: var(--text-muted); line-height: 1.85; margin: 0 auto 56px; text-align: center; }
-    .journey-thesis em { color: var(--text); font-style: normal; }
-    .journey-flow { display: flex; align-items: flex-start; gap: 0; position: relative; margin: 0 0 56px; }
-    .journey-flow::before { content: ''; position: absolute; top: 23px; left: 60px; right: 60px; height: 1px; background: linear-gradient(90deg, var(--accent) 0%, rgba(236,72,153,0.5) 100%); z-index: 0; }
-    .jflow-step { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 1; }
-    .jflow-dot { width: 48px; height: 48px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--accent-light); margin-bottom: 14px; flex-shrink: 0; }
-    .jflow-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-    .jflow-tag { font-size: 11px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
-    .journey-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .journey-label { display: flex; justify-content: center; }
+    .exp-why { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 28px; padding: 16px; background: rgba(124,58,237,0.07); border-left: 2px solid var(--accent); border-radius: 0 8px 8px 0; }
+    .exp-cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 
     /* Footer */
     footer { border-top: 1px solid var(--border); padding: 44px 40px; }
@@ -94,12 +82,10 @@
 
     @media (max-width: 960px) {
       nav { padding: 0 24px; }
+      .nav-links, .nav-cta-desktop { display: none; }
+      .hamburger { display: flex; }
       .container { padding: 0 24px; }
       .exp-grid { grid-template-columns: 1fr; }
-      .journey-flow { flex-direction: column; align-items: stretch; gap: 20px; }
-      .journey-flow::before { display: none; }
-      .jflow-step { flex-direction: row; text-align: left; gap: 16px; align-items: flex-start; }
-      .jflow-dot { flex-shrink: 0; margin-bottom: 0; }
       footer { padding: 36px 24px; }
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
     }
@@ -113,20 +99,22 @@
 
 <nav>
   <a href="index.html" class="nav-logo">
-    <svg class="nav-logo-mark" width="28" height="18" viewBox="0 0 28 18" fill="none">
-      <circle cx="9" cy="9" r="9" fill="url(#nlg1)" fill-opacity="0.9"/>
-      <circle cx="19" cy="9" r="9" fill="url(#nlg2)" fill-opacity="0.75"/>
+    <svg class="nav-logo-mark" width="36" height="22" viewBox="0 0 36 22" fill="none">
+      <circle cx="11" cy="11" r="11" fill="url(#nlg1)" fill-opacity="0.9"/>
+      <circle cx="25" cy="11" r="11" fill="url(#nlg2)" fill-opacity="0.75"/>
       <defs>
-        <linearGradient id="nlg1" x1="0" y1="0" x2="18" y2="18" gradientUnits="userSpaceOnUse"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
-        <linearGradient id="nlg2" x1="10" y1="0" x2="28" y2="18" gradientUnits="userSpaceOnUse"><stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/></linearGradient>
+        <linearGradient id="nlg1" x1="0" y1="0" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
+        <linearGradient id="nlg2" x1="14" y1="0" x2="36" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/></linearGradient>
       </defs>
     </svg>
-    <div class="nav-logo-text">
-      <span class="nav-logo-name">AI <span class="nav-x">×</span> Humanity</span>
-      <span class="nav-by">by Videospace</span>
-    </div>
   </a>
-  <a href="presence.html" class="btn btn-primary" style="padding:9px 18px;font-size:13px;">Begin the Journey →</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="tech-lab.html" class="active">Tech Lab</a></li>
+    <li><a href="learn.html">Learn</a></li>
+  </ul>
+  <a href="index.html" class="btn btn-outline nav-cta-desktop" style="padding:9px 18px;font-size:13px;">← Back to Home</a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="hero">
@@ -134,9 +122,8 @@
   <div class="container">
     <div class="hero-inner">
       <div class="label">Tech Lab</div>
-      <h1>Four technologies.<br>One thesis: <span class="gradient-text">AI × Humanity.</span></h1>
-      <p class="hero-sub">Each experience is a live demonstration of what becomes possible when AI amplifies human knowledge. Start anywhere — or follow the journey from beginning to end.</p>
-      <a href="presence.html" class="btn btn-primary btn-lg">Begin the Journey →</a>
+      <h1>Four technologies.<br><span class="gradient-text">Try them yourself.</span></h1>
+      <p class="hero-sub">Each one is a live demonstration of AI in education. Don't read about them — experience them.</p>
     </div>
   </div>
 </div>
@@ -144,69 +131,47 @@
 <section class="experiences">
   <div class="container">
     <div class="exp-grid">
+
       <a href="presence.html" class="exp-card">
         <div class="exp-num">01</div>
-        <div class="exp-name">The Presence</div>
-        <p class="exp-def">A lifelike digital replica of a real person that speaks, responds, and expresses emotions in real time — without the person ever needing to be in the room.</p>
-        <span class="exp-tag">3D Digital Twin</span>
-        <div class="exp-enter">Enter experience <span>→</span></div>
+        <div class="exp-name">3D Avatar</div>
+        <span class="exp-tag">Digital Twin</span>
+        <div class="exp-why">A digital educator that shows up for every student, any time — in their own language, without booking a class or a meeting.</div>
+        <div class="exp-cta">
+          <span class="btn btn-primary" style="font-size:13px;padding:10px 20px;">Try it →</span>
+        </div>
       </a>
+
       <a href="dialogue.html" class="exp-card">
         <div class="exp-num">02</div>
-        <div class="exp-name">The Dialogue</div>
-        <p class="exp-def">A conversational AI trained on a specific person's content — their talks, writing, and ideas — so you can get answers in their voice and perspective, anytime.</p>
-        <span class="exp-tag">AI Knowledge Chatbot</span>
-        <div class="exp-enter">Enter experience <span>→</span></div>
+        <div class="exp-name">AI Chatbot</div>
+        <span class="exp-tag">Knowledge Assistant</span>
+        <div class="exp-why">A single expert's knowledge reaches every learner at once — personalised, 24/7, always in their voice.</div>
+        <div class="exp-cta">
+          <span class="btn btn-primary" style="font-size:13px;padding:10px 20px;">Try it →</span>
+        </div>
       </a>
+
       <a href="story.html" class="exp-card">
         <div class="exp-num">03</div>
-        <div class="exp-name">The Story</div>
-        <p class="exp-def">Technology that converts a text script into a finished video, with a digital presenter delivering it — no camera, no studio, no scheduling needed.</p>
-        <span class="exp-tag">AI Video Generation</span>
-        <div class="exp-enter">Enter experience <span>→</span></div>
+        <div class="exp-name">Video Generation</div>
+        <span class="exp-tag">AI Video</span>
+        <div class="exp-why">One educator, any language, any scale. A lesson created once becomes a lesson that reaches millions.</div>
+        <div class="exp-cta">
+          <span class="btn btn-primary" style="font-size:13px;padding:10px 20px;">Try it →</span>
+        </div>
       </a>
+
       <a href="memory.html" class="exp-card">
         <div class="exp-num">04</div>
-        <div class="exp-name">The Memory</div>
-        <p class="exp-def">A search engine that understands what you mean, not just what you type. It finds the exact moment in hours of video, audio, or text where your question is answered.</p>
-        <span class="exp-tag">Semantic Video Search</span>
-        <div class="exp-enter">Enter experience <span>→</span></div>
+        <div class="exp-name">Video Search</div>
+        <span class="exp-tag">Semantic Search</span>
+        <div class="exp-why">No more rewatching hours of content to find one answer. Students get exactly what they need, instantly.</div>
+        <div class="exp-cta">
+          <span class="btn btn-primary" style="font-size:13px;padding:10px 20px;">Try it →</span>
+        </div>
       </a>
-    </div>
-  </div>
-</section>
 
-<section class="the-journey">
-  <div class="container">
-    <div class="journey-label"><div class="label">The Journey</div></div>
-    <p class="journey-thesis">
-      If knowledge can <em>take human form</em> — and you can <em>hold a conversation with it</em> — and that conversation can <em>reach anyone, in any language</em> — and every idea is always <em>instantly findable</em> — then knowledge is no longer limited by presence, time, or geography.
-    </p>
-    <div class="journey-flow">
-      <div class="jflow-step">
-        <div class="jflow-dot">01</div>
-        <div class="jflow-name">The Presence</div>
-        <div class="jflow-tag">3D Avatar</div>
-      </div>
-      <div class="jflow-step">
-        <div class="jflow-dot">02</div>
-        <div class="jflow-name">The Dialogue</div>
-        <div class="jflow-tag">AI Chatbot</div>
-      </div>
-      <div class="jflow-step">
-        <div class="jflow-dot">03</div>
-        <div class="jflow-name">The Story</div>
-        <div class="jflow-tag">Video Generation</div>
-      </div>
-      <div class="jflow-step">
-        <div class="jflow-dot">04</div>
-        <div class="jflow-name">The Memory</div>
-        <div class="jflow-tag">Video Search</div>
-      </div>
-    </div>
-    <div class="journey-ctas">
-      <a href="presence.html" class="btn btn-primary btn-lg">Begin with The Presence →</a>
-      <a href="index.html" class="btn btn-outline btn-lg">Back to Home</a>
     </div>
   </div>
 </section>
@@ -214,22 +179,19 @@
 <footer>
   <div class="footer-inner">
     <a href="index.html" class="nav-logo">
-      <svg class="nav-logo-mark" width="28" height="18" viewBox="0 0 28 18" fill="none">
-        <circle cx="9" cy="9" r="9" fill="url(#flg1)" fill-opacity="0.9"/>
-        <circle cx="19" cy="9" r="9" fill="url(#flg2)" fill-opacity="0.75"/>
+      <svg class="nav-logo-mark" width="36" height="22" viewBox="0 0 36 22" fill="none">
+        <circle cx="11" cy="11" r="11" fill="url(#flg1)" fill-opacity="0.9"/>
+        <circle cx="25" cy="11" r="11" fill="url(#flg2)" fill-opacity="0.75"/>
         <defs>
-          <linearGradient id="flg1" x1="0" y1="0" x2="18" y2="18" gradientUnits="userSpaceOnUse"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
-          <linearGradient id="flg2" x1="10" y1="0" x2="28" y2="18" gradientUnits="userSpaceOnUse"><stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/></linearGradient>
+          <linearGradient id="flg1" x1="0" y1="0" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
+          <linearGradient id="flg2" x1="14" y1="0" x2="36" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/></linearGradient>
         </defs>
       </svg>
-      <div class="nav-logo-text">
-        <span class="nav-logo-name">AI <span class="nav-x">×</span> Humanity</span>
-        <span class="nav-by">by Videospace</span>
-      </div>
     </a>
     <ul class="footer-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="tech-lab.html">Tech Lab</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="learn.html">Learn</a></li>
       <li><a href="https://youtube.com/playlist?list=PLbXgTi79jSSYXAEDVQWSCwgsC6CGgVaLy" target="_blank" rel="noopener">Podcast</a></li>
     </ul>
     <span class="footer-copy">© 2025 Videospace. All rights reserved.</span>
