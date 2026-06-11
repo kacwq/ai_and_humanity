@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Avatar — AI × Humanity</title>
+  <title>Talk to Axel — AI × Humanity</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -34,6 +34,7 @@
 
     .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 
+    /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 40px; height: 68px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,8,16,0.75); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
     .nav-logo { display: flex; align-items: center; text-decoration: none; }
     .nav-logo-mark { flex-shrink: 0; display: block; }
@@ -43,33 +44,19 @@
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
     .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-muted); border-radius: 2px; }
 
-    .experience-wrap { padding-top: 68px; }
-    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; padding: 80px 0 100px; }
-    .tech-content { position: relative; z-index: 1; }
-    .tech-content h2 { margin-bottom: 28px; }
-    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-    .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text-muted); }
-    .feature-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light); flex-shrink: 0; margin-top: 8px; }
+    /* Page hero */
+    .page-hero { padding: calc(68px + 72px) 0 64px; }
+    .page-hero-inner { max-width: 680px; }
+    .page-hero-inner h2 { margin-bottom: 16px; }
+    .page-hero-inner p { font-size: 17px; color: var(--text-muted); line-height: 1.8; }
 
-    .why-matters { border-left: 3px solid var(--accent-light); padding: 16px 20px; background: rgba(124,58,237,0.06); border-radius: 0 var(--radius) var(--radius) 0; margin: 24px 0 28px; }
-    .why-matters-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 8px; display: block; }
-    .why-matters p { font-size: 14.5px; color: var(--text); line-height: 1.7; }
+    /* Experience grid */
+    .experience-section { padding-bottom: 80px; }
+    .experience-grid { display: grid; grid-template-columns: 1fr 1.35fr; gap: 56px; align-items: flex-start; }
 
-    .accordion { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-top: 24px; }
-    .accordion-trigger { width: 100%; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.03); border: none; font-family: inherit; font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.15s; text-align: left; }
-    .accordion-trigger:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-    .accordion-arrow { transition: transform 0.2s; font-size: 11px; }
-    .accordion-trigger.open { color: var(--text); }
-    .accordion-trigger.open .accordion-arrow { transform: rotate(180deg); }
-    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-    .accordion-body-inner { padding: 16px 20px; font-size: 13.5px; color: var(--text-muted); line-height: 1.75; border-top: 1px solid var(--border); }
-    .accordion-body-inner ol { padding-left: 18px; }
-    .accordion-body-inner ol li { margin-bottom: 8px; }
-
-    .tech-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
-
-    .mockup-wrap { position: relative; display: flex; align-items: center; justify-content: center; }
-    .avatar-stage { width: 100%; aspect-ratio: 1; max-width: 460px; display: flex; align-items: center; justify-content: center; position: relative; }
+    /* Avatar column */
+    .avatar-col { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+    .avatar-stage { width: 100%; aspect-ratio: 1; max-width: 380px; display: flex; align-items: center; justify-content: center; position: relative; }
     .av-orbit { position: absolute; border-radius: 50%; border: 1px solid var(--border); }
     .av-orbit-1 { width: 70%; height: 70%; animation: spin 22s linear infinite; }
     .av-orbit-2 { width: 86%; height: 86%; animation: spin 34s linear infinite reverse; border-style: dashed; opacity: 0.4; }
@@ -79,35 +66,87 @@
     .av-disc::after { content: ''; position: absolute; inset: -20px; border-radius: 50%; background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%); animation: breathe 3.5s ease-in-out infinite; }
     @keyframes breathe { 0%,100%{opacity:.5;transform:scale(1)} 50%{opacity:1;transform:scale(1.07)} }
     @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-    .av-label { text-align: center; font-size: 12px; color: var(--text-muted); }
-    .av-label strong { display: block; font-size: 13px; color: var(--accent-light); margin-bottom: 4px; }
-    .av-tag { position: absolute; background: var(--bg-card); border: 1px solid var(--border-hover); border-radius: 8px; padding: 8px 14px; font-size: 12px; font-weight: 600; color: var(--text-muted); white-space: nowrap; animation: float 4s ease-in-out infinite; }
+    .av-label { text-align: center; font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+    .av-label strong { display: block; font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 3px; letter-spacing: -0.01em; }
+    .av-tag { position: absolute; background: var(--bg-card); border: 1px solid var(--border-hover); border-radius: 8px; padding: 7px 12px; font-size: 11px; font-weight: 600; color: var(--text-muted); white-space: nowrap; animation: float 4s ease-in-out infinite; }
     .av-tag-1 { top: 12%; left: 0; }
     .av-tag-2 { top: 50%; right: 0; }
-    .av-tag-3 { bottom: 12%; left: 8%; }
+    .av-tag-3 { bottom: 12%; left: 6%; }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
     .av-tag-2 { animation: float2 4s ease-in-out 1.2s infinite; }
     @keyframes float2 { 0%,100%{transform:translateY(-50%)} 50%{transform:translateY(calc(-50% - 7px))} }
     .av-tag-3 { animation: float 4s ease-in-out 0.6s infinite; }
+    .axel-identity { text-align: center; }
+    .axel-identity strong { display: block; font-size: 17px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .axel-identity span { font-size: 13px; color: var(--text-dim); }
 
+    /* Chat interface */
+    .chat-col { }
+    .chat-mockup { width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .chat-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); }
+    .chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; color: #fff; }
+    .chat-name { font-size: 14px; font-weight: 700; }
+    .chat-sub { font-size: 11px; color: var(--text-dim); }
+    .chat-status { margin-left: auto; display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-dim); }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; flex-shrink: 0; }
+    .chat-mode-toggle { display: flex; gap: 4px; background: rgba(255,255,255,0.05); border-radius: 7px; padding: 3px; margin-left: 12px; }
+    .mode-btn { padding: 4px 10px; border-radius: 5px; font-size: 11px; font-weight: 600; color: var(--text-dim); cursor: pointer; transition: all 0.15s; border: none; background: none; font-family: inherit; }
+    .mode-btn.active { background: var(--bg-card); color: var(--text); }
+    .chat-messages { padding: 20px; display: flex; flex-direction: column; gap: 16px; min-height: 280px; }
+    .chat-msg { display: flex; gap: 10px; max-width: 88%; }
+    .chat-msg.user { margin-left: auto; flex-direction: row-reverse; }
+    .msg-avatar { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+    .msg-avatar.ai { background: var(--grad); color: #fff; }
+    .msg-avatar.human { background: rgba(255,255,255,0.1); color: var(--text-muted); }
+    .msg-bubble { padding: 10px 14px; border-radius: 14px; font-size: 13.5px; line-height: 1.6; }
+    .chat-msg.ai .msg-bubble { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-top-left-radius: 4px; color: var(--text-muted); }
+    .chat-msg.user .msg-bubble { background: rgba(124,58,237,0.25); border: 1px solid rgba(124,58,237,0.3); border-top-right-radius: 4px; color: #e0d8ff; }
+    .msg-source { display: block; font-size: 11px; color: var(--text-dim); margin-top: 6px; font-style: italic; }
+    .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 6px 2px; }
+    .typing-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-dim); animation: blink 1.2s infinite; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink { 0%,100%{opacity:0.3} 50%{opacity:1} }
+    .sample-qs { padding: 0 16px 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .sample-q { padding: 5px 12px; border-radius: 100px; font-size: 12px; font-weight: 500; border: 1px solid var(--border); color: var(--text-muted); cursor: pointer; transition: all 0.15s; background: none; font-family: inherit; }
+    .sample-q:hover { border-color: var(--accent-light); color: var(--accent-light); }
+    .chat-input-bar { padding: 14px 16px; border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; }
+    .chat-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; padding: 9px 14px; font-size: 13px; color: var(--text-muted); font-family: inherit; outline: none; }
+    .chat-send { width: 36px; height: 36px; border-radius: 8px; border: none; background: var(--grad); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .chat-mic { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border); background: rgba(255,255,255,0.03); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-muted); flex-shrink: 0; }
+
+    /* Details section */
+    .details-section { padding: 0 0 100px; }
+    .why-matters { border-left: 3px solid var(--accent-light); padding: 16px 20px; background: rgba(124,58,237,0.06); border-radius: 0 var(--radius) var(--radius) 0; margin-bottom: 24px; }
+    .why-matters-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 8px; display: block; }
+    .why-matters p { font-size: 14.5px; color: var(--text); line-height: 1.7; }
+    .accordion { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 32px; }
+    .accordion-trigger { width: 100%; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.03); border: none; font-family: inherit; font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.15s; text-align: left; }
+    .accordion-trigger:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .accordion-arrow { transition: transform 0.2s; font-size: 11px; }
+    .accordion-trigger.open { color: var(--text); }
+    .accordion-trigger.open .accordion-arrow { transform: rotate(180deg); }
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .accordion-body-inner { padding: 16px 20px; font-size: 13.5px; color: var(--text-muted); line-height: 1.75; border-top: 1px solid var(--border); }
+    .accordion-body-inner ol { padding-left: 18px; }
+    .accordion-body-inner ol li { margin-bottom: 10px; }
+    .source-note { font-size: 13px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .source-note a { color: var(--text-muted); text-decoration: none; border-bottom: 1px solid var(--border-hover); transition: color 0.15s, border-color 0.15s; }
+    .source-note a:hover { color: var(--accent-light); border-color: var(--accent-light); }
+
+    /* Footer */
     footer { border-top: 1px solid var(--border); padding: 44px 40px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
     .footer-copy { font-size: 13px; color: var(--text-dim); }
-
-    .chat-fab { position: fixed; bottom: 30px; right: 30px; z-index: 300; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-    .chat-tooltip { background: var(--bg-card); border: 1px solid var(--border-hover); border-radius: 10px; padding: 10px 16px; font-size: 13px; color: var(--text); white-space: nowrap; opacity: 0; transform: translateY(4px); transition: all 0.2s; pointer-events: none; }
-    .chat-fab:hover .chat-tooltip { opacity: 1; transform: translateY(0); }
-    .chat-btn { width: 56px; height: 56px; border-radius: 50%; background: var(--grad); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 8px 32px rgba(124,58,237,0.45); transition: transform 0.2s; }
-    .chat-btn:hover { transform: scale(1.1); }
 
     @media (max-width: 960px) {
       nav { padding: 0 24px; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .container { padding: 0 24px; }
-      .tech-grid { grid-template-columns: 1fr; direction: ltr; gap: 48px; }
-      .mockup-wrap { order: -1; }
-      .avatar-stage { max-width: 340px; }
+      .experience-grid { grid-template-columns: 1fr; gap: 48px; }
+      .avatar-col { order: -1; }
+      .avatar-stage { max-width: 300px; }
       footer { padding: 36px 24px; }
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
     }
@@ -127,63 +166,115 @@
     </svg>
   </a>
   <ul class="nav-links">
-    <li><a href="presence.html" class="active">3D Avatar</a></li>
-    <li><a href="dialogue.html">AI Chatbot</a></li>
-    <li><a href="story.html">Video Generation</a></li>
-    <li><a href="memory.html">Video Search</a></li>
+    <li><a href="presence.html" class="active">Talk to Axel</a></li>
+    <li><a href="learn.html">Explore</a></li>
   </ul>
   <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="experience-wrap">
+<div class="page-hero">
   <div class="container">
-    <div class="tech-grid">
+    <div class="page-hero-inner">
+      <div class="label">Digital Twin</div>
+      <h2>Talk to Axel.</h2>
+      <p>Axel is the digital twin of Alex Chan, co-author of AI × Humanity. Ask him anything — the book's arguments, the Alpha and Omega choice, or what AI means for your world.</p>
+    </div>
+  </div>
+</div>
 
-      <div class="tech-content">
-        <div class="label">3D Avatar</div>
-        <h2>One person.<br><span class="gradient-text">Everywhere at once.</span></h2>
-        <ul class="feature-list">
-          <li>Real-time facial and voice interaction</li>
-          <li>Responds in [Name]'s voice and mannerisms</li>
-          <li>Available in browser — no download required</li>
-          <li>Powered by [placeholder: AI platform name]</li>
-        </ul>
-        <div class="accordion">
-          <button class="accordion-trigger">How does this work? <span class="accordion-arrow">▾</span></button>
-          <div class="accordion-body">
-            <div class="accordion-body-inner">
-              <ol>
-                <li>[Name]'s voice, likeness, and speech patterns were captured and used to train a personalised avatar model.</li>
-                <li>The 3D rendering engine generates facial expressions and lip sync in real time based on AI-generated speech.</li>
-                <li>A language model fine-tuned on [Name]'s content handles the conversation logic and produces responses in character.</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-        <div class="why-matters">
-          <span class="why-matters-label">Why this matters</span>
-          <p>When a person's knowledge and presence can exist anywhere — simultaneously, at unlimited scale — the geography of learning collapses. A student anywhere in the world gets the same depth of engagement as someone in the front row.</p>
-        </div>
-        <div class="tech-ctas">
-          <a href="#" class="btn btn-primary btn-lg">Launch Avatar →</a>
-          <a href="#" class="btn btn-outline btn-lg">Watch a demo</a>
-        </div>
-      </div>
+<div class="experience-section">
+  <div class="container">
+    <div class="experience-grid">
 
-      <div class="mockup-wrap">
+      <div class="avatar-col">
         <div class="avatar-stage">
           <div class="av-orbit av-orbit-3"><div class="av-orbit-dot"></div></div>
           <div class="av-orbit av-orbit-2"><div class="av-orbit-dot"></div></div>
           <div class="av-orbit av-orbit-1"><div class="av-orbit-dot"></div></div>
           <div class="av-disc">
-            <div class="av-label"><strong>3D Avatar</strong>[Name]'s<br>Digital Twin</div>
+            <div class="av-label"><strong>Axel</strong>Digital Twin</div>
           </div>
-          <div class="av-tag av-tag-1">🎙 Voice-enabled</div>
+          <div class="av-tag av-tag-1">📚 AI × Humanity</div>
           <div class="av-tag av-tag-2">⚡ Real-time</div>
-          <div class="av-tag av-tag-3">🧠 AI-powered</div>
+          <div class="av-tag av-tag-3">🧬 Digital Twin</div>
+        </div>
+        <div class="axel-identity">
+          <strong>Axel</strong>
+          <span>Digital Twin of Alex Chan</span>
         </div>
       </div>
 
+      <div class="chat-col">
+        <div class="chat-mockup">
+          <div class="chat-header">
+            <div class="chat-avatar">A</div>
+            <div>
+              <div class="chat-name">Axel</div>
+              <div class="chat-sub">Digital Twin · Alex Chan</div>
+            </div>
+            <div class="chat-status"><span class="status-dot"></span> Online now</div>
+            <div class="chat-mode-toggle">
+              <button class="mode-btn active">Text</button>
+              <button class="mode-btn">🎙 Voice</button>
+            </div>
+          </div>
+          <div class="chat-messages">
+            <div class="chat-msg ai">
+              <div class="msg-avatar ai">A</div>
+              <div class="msg-bubble">Hi — I'm Axel, Alex Chan's digital twin. I'm trained on AI × Humanity — the book and all eight podcast episodes. Ask me anything.</div>
+            </div>
+            <div class="chat-msg user">
+              <div class="msg-avatar human">You</div>
+              <div class="msg-bubble">What's the most urgent thing people need to understand about AI right now?</div>
+            </div>
+            <div class="chat-msg ai">
+              <div class="msg-avatar ai">A</div>
+              <div class="msg-bubble">That we're not in another technology cycle. The book makes this case strongly — it's the collision of AI's hyper-accelerated speed, unprecedented scale, and convergence with quantum computing and new energy that creates a feedback loop. We've crossed a threshold. The question isn't whether AI reshapes everything — it's whether humanity shapes AI before AI shapes us.<span class="msg-source">— AI × Humanity, Chapter 2</span></div>
+            </div>
+            <div class="chat-msg ai">
+              <div class="msg-avatar ai">A</div>
+              <div class="msg-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>
+            </div>
+          </div>
+          <div class="sample-qs">
+            <button class="sample-q">What is Alpha or Omega?</button>
+            <button class="sample-q">What's the biggest risk from AI?</button>
+            <button class="sample-q">How was this book created?</button>
+            <button class="sample-q">What can I do about it?</button>
+          </div>
+          <div class="chat-input-bar">
+            <input class="chat-input" type="text" placeholder="Ask Axel anything about AI × Humanity…" readonly>
+            <button class="chat-mic">🎙</button>
+            <button class="chat-send">➤</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="details-section">
+  <div class="container">
+    <div class="why-matters">
+      <span class="why-matters-label">Why this matters</span>
+      <p>Most people will never read a book about AI's impact on humanity. But most people have real questions about what it means for their work, their family, their world. Axel makes those answers accessible — not as a search result, but as a conversation with someone who has thought deeply about it.</p>
+    </div>
+    <div class="accordion">
+      <button class="accordion-trigger">How does this work? <span class="accordion-arrow">▾</span></button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <ol>
+            <li>Axel is built on the complete AI × Humanity knowledge base — the book, all 8 podcast episodes, and supporting research from co-authors Alex Chan and Viki Esther Chang.</li>
+            <li>When you ask a question, Axel draws on that material to answer in Alex's voice and perspective.</li>
+            <li>Where relevant, Axel references the specific podcast episode or chapter the answer comes from — so you can always go deeper.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="source-note">
+      Axel's answers are sourced from the AI × Humanity knowledge base. ·
+      <a href="https://notebooklm.google.com/notebook/8359c6da-129f-4895-83ff-b91919c4b921" target="_blank" rel="noopener">Explore the full archive on NotebookLM →</a>
     </div>
   </div>
 </div>
@@ -200,14 +291,9 @@
         </defs>
       </svg>
     </a>
-    <span class="footer-copy">© 2025 Videospace. All rights reserved.</span>
+    <span class="footer-copy">© 2025 AI × Humanity. All rights reserved.</span>
   </div>
 </footer>
-
-<div class="chat-fab">
-  <div class="chat-tooltip">Chat with the AI</div>
-  <button class="chat-btn" aria-label="Open AI chat">💬</button>
-</div>
 
 <script>
   document.querySelectorAll('.accordion-trigger').forEach(btn => {
