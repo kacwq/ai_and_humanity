@@ -103,31 +103,22 @@
     .axel-content h2 { margin-bottom: 20px; }
     .axel-content p { font-size: 17px; color: var(--text-muted); line-height: 1.8; margin-bottom: 36px; }
 
-    /* Chat preview */
-    .chat-preview { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-    .cp-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02); }
-    .cp-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; color: #fff; }
-    .cp-name { font-size: 13px; font-weight: 700; }
-    .cp-sub { font-size: 11px; color: var(--text-dim); }
-    .cp-status { margin-left: auto; display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-dim); }
-    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; }
-    .cp-messages { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-    .cp-msg { display: flex; gap: 8px; max-width: 90%; }
-    .cp-msg.user { margin-left: auto; flex-direction: row-reverse; }
-    .cp-msg-avatar { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; }
-    .cp-msg-avatar.ai { background: var(--grad); color: #fff; }
-    .cp-msg-avatar.human { background: rgba(255,255,255,0.1); color: var(--text-muted); }
-    .cp-bubble { padding: 9px 13px; border-radius: 12px; font-size: 13px; line-height: 1.55; }
-    .cp-msg.ai .cp-bubble { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-top-left-radius: 3px; color: var(--text-muted); }
-    .cp-msg.user .cp-bubble { background: rgba(124,58,237,0.22); border: 1px solid rgba(124,58,237,0.3); border-top-right-radius: 3px; color: #e0d8ff; }
-    .cp-input-row { padding: 12px 14px; border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; }
-    .cp-input { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 7px; padding: 8px 12px; font-size: 12px; color: var(--text-dim); font-family: inherit; outline: none; }
-    .cp-send { width: 30px; height: 30px; border-radius: 7px; border: none; background: var(--grad); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+    /* Axel identity card */
+    .axel-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 48px 40px; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+    .axel-orb { width: 100px; height: 100px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 900; color: #fff; animation: orb-pulse 3s ease-in-out infinite; box-shadow: 0 0 48px rgba(124,58,237,0.4); }
+    @keyframes orb-pulse { 0%,100%{box-shadow:0 0 40px rgba(124,58,237,0.35)} 50%{box-shadow:0 0 70px rgba(124,58,237,0.55)} }
+    .axel-id { text-align: center; }
+    .axel-id-name { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+    .axel-id-role { font-size: 12px; color: var(--accent-light); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .axel-trained-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); text-align: center; }
+    .axel-pills { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+    .axel-pill { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
+    .axel-pill-icon { font-size: 15px; flex-shrink: 0; }
 
     /* Pull quote */
     .quote-section { border-top: 1px solid var(--border); }
     .pull-quote { max-width: 760px; margin: 0 auto; text-align: center; }
-    .quote-mark { font-size: 80px; line-height: 0.6; color: var(--accent); margin-bottom: 20px; font-family: Georgia, serif; display: block; }
+    .quote-mark { font-size: 56px; line-height: 1; color: var(--accent); margin-bottom: 12px; font-family: Georgia, serif; display: block; }
     .pull-quote p { font-size: clamp(22px, 3vw, 32px); font-weight: 700; line-height: 1.35; letter-spacing: -0.02em; color: var(--text); margin-bottom: 24px; }
     .pull-quote cite { font-size: 14px; color: var(--text-dim); font-style: normal; letter-spacing: 0.04em; }
 
@@ -193,7 +184,6 @@
         <p class="hero-sub">A new golden age. Or an ominous end. AI puts humanity at a crossroads — and the future depends on the choices we make now.</p>
         <div class="hero-ctas">
           <a href="presence.html" class="btn btn-primary btn-lg">Talk to Axel →</a>
-          <a href="learn.html" class="btn btn-outline btn-lg">Explore the book</a>
         </div>
       </div>
       <div class="venn-wrap">
@@ -249,32 +239,17 @@
 <section class="axel-section">
   <div class="container">
     <div class="axel-grid">
-      <div class="chat-preview">
-        <div class="cp-header">
-          <div class="cp-avatar">A</div>
-          <div>
-            <div class="cp-name">Axel</div>
-            <div class="cp-sub">Digital Twin · Alex Chan</div>
-          </div>
-          <div class="cp-status"><span class="status-dot"></span> Online</div>
+      <div class="axel-card">
+        <div class="axel-orb">A</div>
+        <div class="axel-id">
+          <div class="axel-id-name">Axel</div>
+          <div class="axel-id-role">3D Avatar · Digital Twin of Alex Chan</div>
         </div>
-        <div class="cp-messages">
-          <div class="cp-msg ai">
-            <div class="cp-msg-avatar ai">A</div>
-            <div class="cp-bubble">Hi — I'm Axel, Alex Chan's digital twin. Ask me anything about AI × Humanity or what the book argues about our future.</div>
-          </div>
-          <div class="cp-msg user">
-            <div class="cp-msg-avatar human">You</div>
-            <div class="cp-bubble">What does Alpha or Omega actually mean?</div>
-          </div>
-          <div class="cp-msg ai">
-            <div class="cp-msg-avatar ai">A</div>
-            <div class="cp-bubble">It's the central question — Alpha is the golden age where AI solves our hardest problems and liberates humanity. Omega is the other path: mass disruption, concentrated power, and systems beyond human control. Neither is inevitable. Which future we get depends on choices being made right now.</div>
-          </div>
-        </div>
-        <div class="cp-input-row">
-          <input class="cp-input" type="text" placeholder="Ask Axel anything…" readonly>
-          <button class="cp-send">➤</button>
+        <div class="axel-trained-label">Trained on</div>
+        <div class="axel-pills">
+          <div class="axel-pill"><span class="axel-pill-icon">📖</span> AI × Humanity: Alpha or Omega</div>
+          <div class="axel-pill"><span class="axel-pill-icon">🎙</span> 8 podcast episodes</div>
+          <div class="axel-pill"><span class="axel-pill-icon">🤖</span> Curated knowledge base</div>
         </div>
       </div>
       <div class="axel-content">
